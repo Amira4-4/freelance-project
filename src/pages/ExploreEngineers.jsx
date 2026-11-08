@@ -7,10 +7,7 @@ import {
   SlidersHorizontal, 
   Users, 
   Star, 
-  CheckCircle2, 
-  Clock, 
   ArrowUpDown,
-  Building2,
   X
 } from 'lucide-react';
 import Layout from '../components/Layout';
@@ -29,10 +26,10 @@ export default function ExploreEngineers() {
   const [engineers, setEngineers] = useState([]);
   const [search, setSearch] = useState(initialQuery);
   const [selectedSpecialty, setSelectedSpecialty] = useState(initialSpecialty);
-  const [minRating, setMinRating] = useState('all'); // 'all', '4.5', '4.0'
-  const [experienceLevel, setExperienceLevel] = useState('all'); // 'all', 'junior', 'mid', 'senior'
+  const [minRating, setMinRating] = useState('all');
+  const [experienceLevel, setExperienceLevel] = useState('all');
   const [availabilityOnly, setAvailabilityOnly] = useState(false);
-  const [sortBy, setSortBy] = useState('rating'); // 'rating', 'price-asc', 'price-desc', 'experience'
+  const [sortBy, setSortBy] = useState('rating');
   const [currentPage, setCurrentPage] = useState(1);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const itemsPerPage = 8;
@@ -41,7 +38,6 @@ export default function ExploreEngineers() {
     setEngineers(getEngineers('approved'));
   }, []);
 
-  // Sync state if URL query params change
   useEffect(() => {
     if (searchParams.get('q')) setSearch(searchParams.get('q'));
     if (searchParams.get('specialty')) setSelectedSpecialty(searchParams.get('specialty'));
@@ -61,7 +57,6 @@ export default function ExploreEngineers() {
   const filteredEngineers = useMemo(() => {
     return engineers
       .filter((eng) => {
-        // Search term matching
         const q = search.toLowerCase().trim();
         const matchesSearch =
           !q ||
@@ -70,21 +65,17 @@ export default function ExploreEngineers() {
           (eng.skills || []).some((s) => s.toLowerCase().includes(q)) ||
           (eng.bio || '').toLowerCase().includes(q);
 
-        // Specialty filter
         const matchesSpecialty =
           selectedSpecialty === 'all' || eng.specialty === selectedSpecialty;
 
-        // Rating filter
         const matchesRating =
           minRating === 'all' || eng.rating >= parseFloat(minRating);
 
-        // Experience filter
         let matchesExp = true;
         if (experienceLevel === 'junior') matchesExp = eng.experience <= 3;
         else if (experienceLevel === 'mid') matchesExp = eng.experience >= 4 && eng.experience <= 7;
         else if (experienceLevel === 'senior') matchesExp = eng.experience >= 8;
 
-        // Availability filter
         const matchesAvailability = !availabilityOnly || eng.availability === 'available';
 
         return (
@@ -112,22 +103,22 @@ export default function ExploreEngineers() {
 
   return (
     <Layout>
-      <div className="py-8 sm:py-12">
+      <div className="py-8 sm:py-12 text-left">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-right mb-8">
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              استكشف نخبة المهندسين والاستشاريين
+          <div className="mb-8">
+            <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+              Explore Certified Engineering Consultants
             </h1>
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
-              تصفح وتواصل مع مهندسين معتمدين في شتى التخصصات الهندسية، وقارن بين سابقة أعمالهم وتقييمات العملاء.
+              Browse accredited consultants across every technical discipline. Review verified portfolios and client testimonials.
             </p>
           </div>
 
           {/* Search & Mobile Filter Toggle Bar */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-3 sm:p-4 border border-slate-200/90 dark:border-slate-800 shadow-sm mb-8 flex flex-col sm:flex-row items-center gap-3">
-            <div className="relative flex-1 w-full text-right">
-              <Search className="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className="relative flex-1 w-full">
+              <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={search}
@@ -135,8 +126,8 @@ export default function ExploreEngineers() {
                   setSearch(e.target.value);
                   setCurrentPage(1);
                 }}
-                placeholder="ابحث بالاسم، المهارة، أو نوع المشروع..."
-                className="w-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl pr-11 pl-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition"
+                placeholder="Search by name, skill, specialty (e.g. Seismic, Revit, HVAC, Façade)..."
+                className="w-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl pl-11 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500 transition"
               />
             </div>
 
@@ -147,12 +138,12 @@ export default function ExploreEngineers() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-transparent text-slate-700 dark:text-slate-200 outline-none cursor-pointer font-medium"
+                  className="bg-transparent text-slate-700 dark:text-slate-200 outline-none cursor-pointer font-semibold"
                 >
-                  <option value="rating">الأعلى تقييماً</option>
-                  <option value="experience">الأكثر خبرة</option>
-                  <option value="price-asc">الأقل سعراً للساعة</option>
-                  <option value="price-desc">الأعلى سعراً للساعة</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="experience">Most Experienced</option>
+                  <option value="price-asc">Lowest Hourly Rate</option>
+                  <option value="price-desc">Highest Hourly Rate</option>
                 </select>
               </div>
 
@@ -160,10 +151,10 @@ export default function ExploreEngineers() {
               <button
                 type="button"
                 onClick={() => setMobileFilterOpen(true)}
-                className="lg:hidden flex items-center gap-1.5 px-3 py-2 rounded-xl bg-brand-blue text-white text-xs font-semibold"
+                className="lg:hidden flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-blue text-white text-xs font-bold"
               >
                 <SlidersHorizontal className="w-4 h-4" />
-                <span>الفلاتر</span>
+                <span>Filters</span>
               </button>
             </div>
           </div>
@@ -171,41 +162,41 @@ export default function ExploreEngineers() {
           {/* Main Layout: Sidebar Filters + Engineers Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
             {/* Desktop Filters Sidebar */}
-            <aside className="hidden lg:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-sm sticky top-28 text-right space-y-6">
+            <aside className="hidden lg:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-sm sticky top-28 space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
                 <span className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
-                  <Filter className="w-4 h-4 text-brand-blue" />
-                  <span>تصفية النتائج</span>
+                  <Filter className="w-4 h-4 text-cyan-500" />
+                  <span>Filter Talent</span>
                 </span>
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="text-xs text-slate-500 hover:text-brand-blue dark:hover:text-brand-cyan flex items-center gap-1"
+                  className="text-xs text-slate-500 hover:text-brand-blue dark:hover:text-cyan-400 flex items-center gap-1 font-semibold"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
-                  <span>إعادة ضبط</span>
+                  <span>Reset All</span>
                 </button>
               </div>
 
               {/* Specialization Filter */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2.5">
-                  التخصص الهندسي
+                  Engineering Specialty
                 </label>
-                <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                <div className="space-y-1.5 max-h-56 overflow-y-auto pl-1">
                   <button
                     type="button"
                     onClick={() => {
                       setSelectedSpecialty('all');
                       setCurrentPage(1);
                     }}
-                    className={`w-full text-right text-xs px-3 py-2 rounded-xl transition font-medium flex items-center justify-between ${
+                    className={`w-full text-left text-xs px-3 py-2 rounded-xl transition font-medium flex items-center justify-between ${
                       selectedSpecialty === 'all'
-                        ? 'bg-brand-blue text-white font-bold'
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold'
                         : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                     }`}
                   >
-                    <span>كل التخصصات</span>
+                    <span>All Specialties</span>
                     <span className="text-[10px] opacity-80">{engineers.length}</span>
                   </button>
                   {ENGINEERING_CATEGORIES.map((cat) => {
@@ -219,9 +210,9 @@ export default function ExploreEngineers() {
                           setSelectedSpecialty(cat.id);
                           setCurrentPage(1);
                         }}
-                        className={`w-full text-right text-xs px-3 py-2 rounded-xl transition font-medium flex items-center justify-between ${
+                        className={`w-full text-left text-xs px-3 py-2 rounded-xl transition font-medium flex items-center justify-between ${
                           isSelected
-                            ? 'bg-brand-blue text-white font-bold'
+                            ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold'
                             : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                         }`}
                       >
@@ -236,14 +227,14 @@ export default function ExploreEngineers() {
               {/* Experience Level Filter */}
               <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2.5">
-                  سنوات الخبرة
+                  Experience Level
                 </label>
                 <div className="space-y-1 text-xs">
                   {[
-                    { key: 'all', label: 'الكل' },
-                    { key: 'junior', label: '1 - 3 سنوات' },
-                    { key: 'mid', label: '4 - 7 سنوات (محترف)' },
-                    { key: 'senior', label: '8+ سنوات (استشاري وخبير)' },
+                    { key: 'all', label: 'All Experience Levels' },
+                    { key: 'junior', label: '1 - 3 Years' },
+                    { key: 'mid', label: '4 - 7 Years (Mid-Senior)' },
+                    { key: 'senior', label: '8+ Years (Principal / Lead)' },
                   ].map((exp) => (
                     <label
                       key={exp.key}
@@ -258,7 +249,7 @@ export default function ExploreEngineers() {
                           setExperienceLevel(e.target.value);
                           setCurrentPage(1);
                         }}
-                        className="text-brand-blue focus:ring-brand-blue/30"
+                        className="text-cyan-500 focus:ring-cyan-400"
                       />
                       <span className="text-slate-700 dark:text-slate-300">{exp.label}</span>
                     </label>
@@ -269,13 +260,13 @@ export default function ExploreEngineers() {
               {/* Rating Filter */}
               <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2.5">
-                  التقييم الأدنى
+                  Minimum Rating
                 </label>
                 <div className="space-y-1 text-xs">
                   {[
-                    { key: 'all', label: 'الكل' },
-                    { key: '4.5', label: '4.5 نجوم وأعلى' },
-                    { key: '4.0', label: '4.0 نجوم وأعلى' },
+                    { key: 'all', label: 'Any Rating' },
+                    { key: '4.5', label: '4.5 Stars & Up' },
+                    { key: '4.0', label: '4.0 Stars & Up' },
                   ].map((r) => (
                     <label
                       key={r.key}
@@ -290,7 +281,7 @@ export default function ExploreEngineers() {
                           setMinRating(e.target.value);
                           setCurrentPage(1);
                         }}
-                        className="text-brand-blue focus:ring-brand-blue/30"
+                        className="text-cyan-500 focus:ring-cyan-400"
                       />
                       <span className="text-slate-700 dark:text-slate-300 flex items-center gap-1">
                         <span>{r.label}</span>
@@ -305,7 +296,7 @@ export default function ExploreEngineers() {
               <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
                 <label className="flex items-center justify-between cursor-pointer">
                   <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                    متاح للعمل فوراً فقط
+                    Available for Work Only
                   </span>
                   <input
                     type="checkbox"
@@ -314,7 +305,7 @@ export default function ExploreEngineers() {
                       setAvailabilityOnly(e.target.checked);
                       setCurrentPage(1);
                     }}
-                    className="w-4 h-4 rounded text-brand-blue focus:ring-brand-blue/30 cursor-pointer"
+                    className="w-4 h-4 rounded text-cyan-500 focus:ring-cyan-400 cursor-pointer"
                   />
                 </label>
               </div>
@@ -323,24 +314,24 @@ export default function ExploreEngineers() {
             {/* Main Engineers Grid & Results */}
             <main className="lg:col-span-3">
               <div className="flex items-center justify-between mb-4 text-xs text-slate-500 dark:text-slate-400 px-1">
-                <span>تم العثور على {filteredEngineers.length} مهندس معتمد</span>
+                <span>Showing {filteredEngineers.length} verified consultants</span>
                 {selectedSpecialty !== 'all' && (
-                  <span className="font-semibold text-brand-blue dark:text-brand-cyan">
-                    تخصص: {SPECIALTY_LABELS[selectedSpecialty]}
+                  <span className="font-bold text-cyan-600 dark:text-cyan-400">
+                    Discipline: {SPECIALTY_LABELS[selectedSpecialty]}
                   </span>
                 )}
               </div>
 
               {filteredEngineers.length === 0 ? (
                 <div className="bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
-                  <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-brand-blue flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 rounded-2xl bg-cyan-50 dark:bg-cyan-950/60 text-cyan-600 flex items-center justify-center mx-auto mb-4">
                     <Users className="w-8 h-8" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">
-                    لم نجد أي مهندسين يطابقون هذه الفلاتر
+                    No engineers found matching these filters
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto mt-1 mb-6">
-                    جرب البحث بكلمات عامة أو إعادة تعيين خيارات التصفية لعرض جميع المهندسين المتاحين.
+                    Try broadening your search query or resetting the filter options.
                   </p>
                   <button
                     type="button"
@@ -348,7 +339,7 @@ export default function ExploreEngineers() {
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-blue text-white text-xs font-bold shadow-sm"
                   >
                     <RotateCcw className="w-4 h-4" />
-                    <span>إعادة ضبط الفلاتر</span>
+                    <span>Reset Filters</span>
                   </button>
                 </div>
               ) : (
@@ -366,9 +357,9 @@ export default function ExploreEngineers() {
                         type="button"
                         disabled={currentPage === 1}
                         onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                        className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800"
+                        className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800"
                       >
-                        السابق
+                        Previous
                       </button>
                       {Array.from({ length: totalPages }).map((_, idx) => {
                         const pageNum = idx + 1;
@@ -379,7 +370,7 @@ export default function ExploreEngineers() {
                             onClick={() => setCurrentPage(pageNum)}
                             className={`w-9 h-9 rounded-xl text-xs font-bold transition ${
                               currentPage === pageNum
-                                ? 'bg-brand-blue text-white shadow-sm'
+                                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-sm'
                                 : 'border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                             }`}
                           >
@@ -391,9 +382,9 @@ export default function ExploreEngineers() {
                         type="button"
                         disabled={currentPage === totalPages}
                         onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                        className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800"
+                        className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800"
                       >
-                        التالي
+                        Next
                       </button>
                     </div>
                   )}
@@ -406,14 +397,14 @@ export default function ExploreEngineers() {
 
       {/* Mobile Filters Drawer */}
       {mobileFilterOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end">
+        <div className="fixed inset-0 z-50 flex justify-start">
           <div
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm"
             onClick={() => setMobileFilterOpen(false)}
           />
-          <div className="relative w-full max-w-xs bg-white dark:bg-slate-900 h-full p-6 shadow-2xl z-10 overflow-y-auto text-right">
+          <div className="relative w-full max-w-xs bg-white dark:bg-slate-900 h-full p-6 shadow-2xl z-10 overflow-y-auto text-left">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
-              <span className="font-bold text-base text-slate-900 dark:text-white">الفلاتر</span>
+              <span className="font-bold text-base text-slate-900 dark:text-white">Filters</span>
               <button
                 type="button"
                 onClick={() => setMobileFilterOpen(false)}
@@ -423,17 +414,16 @@ export default function ExploreEngineers() {
               </button>
             </div>
 
-            {/* Specialization */}
             <div className="mb-6">
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                التخصص الهندسي
+                Engineering Specialty
               </label>
               <select
                 value={selectedSpecialty}
                 onChange={(e) => setSelectedSpecialty(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs"
               >
-                <option value="all">كل التخصصات</option>
+                <option value="all">All Specialties</option>
                 {ENGINEERING_CATEGORIES.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}
@@ -442,32 +432,30 @@ export default function ExploreEngineers() {
               </select>
             </div>
 
-            {/* Experience */}
             <div className="mb-6">
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                الخبرة
+                Experience
               </label>
               <select
                 value={experienceLevel}
                 onChange={(e) => setExperienceLevel(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs"
               >
-                <option value="all">الكل</option>
-                <option value="junior">1 - 3 سنوات</option>
-                <option value="mid">4 - 7 سنوات</option>
-                <option value="senior">8+ سنوات</option>
+                <option value="all">All Levels</option>
+                <option value="junior">1 - 3 Years</option>
+                <option value="mid">4 - 7 Years</option>
+                <option value="senior">8+ Years</option>
               </select>
             </div>
 
-            {/* Availability */}
             <div className="mb-8">
               <label className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
-                <span>متاح للعمل فوراً</span>
+                <span>Available for Hire Only</span>
                 <input
                   type="checkbox"
                   checked={availabilityOnly}
                   onChange={(e) => setAvailabilityOnly(e.target.checked)}
-                  className="w-4 h-4 rounded text-brand-blue"
+                  className="w-4 h-4 rounded text-cyan-500"
                 />
               </label>
             </div>
@@ -475,9 +463,9 @@ export default function ExploreEngineers() {
             <button
               type="button"
               onClick={() => setMobileFilterOpen(false)}
-              className="w-full py-3 rounded-xl bg-brand-blue text-white text-xs font-bold shadow-sm"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold shadow-sm"
             >
-              تطبيق الفلاتر ({filteredEngineers.length} مهندس)
+              Apply Filters ({filteredEngineers.length})
             </button>
           </div>
         </div>

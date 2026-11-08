@@ -9,41 +9,65 @@ export default {
     extend: {
       colors: {
         brand: {
-          navy: '#101D35',
-          navyLight: '#182B4D',
-          navyDark: '#0A1222',
-          blue: '#2563EB',
-          blueHover: '#1D4ED8',
-          blueLight: '#EFF6FF',
+          // Pure White & Light Tint
+          white: '#FFFFFF',
+          bg: '#F8FAFC',
+          bgLight: '#F0F7FF',
+          surface: '#FFFFFF',
+          
+          // Cyan & Sky Blue Shades
           cyan: '#06B6D4',
           cyanHover: '#0891B2',
           cyanLight: '#ECFEFF',
-          bg: '#F6F8FC',
-          surface: '#FFFFFF',
-          text: '#172033',
-          muted: '#64748B',
-          border: '#E2E8F0',
-          darkBg: '#0B1120',
-          darkSurface: '#131D33',
+          cyanSoft: '#E0F2FE',
+          cyanGlow: '#22D3EE',
+          sky: '#0284C7',
+          skyLight: '#BAE6FD',
+
+          // Blue in rich harmonious shades
+          blue: '#2563EB',
+          blueHover: '#1D4ED8',
+          blueDark: '#1E40AF',
+          blueDeep: '#1E3A8A',
+          blueLight: '#EFF6FF',
+          blueMuted: '#93C5FD',
+
+          // Dark Shades (Deep Navy & Slate Blue)
+          navy: '#0F172A',
+          navyLight: '#1E293B',
+          navyDark: '#0B132B',
+          darkBg: '#090E1A',
+          darkSurface: '#0F172A',
           darkCard: '#1E293B',
           darkBorder: '#334155',
-          darkText: '#F1F5F9',
-          darkMuted: '#94A3B8'
+
+          // Neutral Typography & Borders
+          text: '#0F172A',
+          muted: '#64748B',
+          border: '#E2E8F0',
+          borderLight: '#F1F5F9',
         },
       },
       fontFamily: {
-        sans: ['"Noto Sans Arabic"', '"Google Sans Flex"', 'system-ui', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       boxShadow: {
-        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
-        'card-hover': '0 10px 25px -5px rgba(16, 29, 53, 0.08), 0 8px 10px -6px rgba(16, 29, 53, 0.04)',
-        'glow': '0 0 20px -5px rgba(37, 99, 235, 0.35)',
-        'cyan-glow': '0 0 20px -5px rgba(6, 182, 212, 0.35)',
+        'card': '0 2px 8px -2px rgba(15, 23, 42, 0.05), 0 1px 4px -1px rgba(15, 23, 42, 0.03)',
+        'card-hover': '0 16px 32px -8px rgba(37, 99, 235, 0.12), 0 4px 12px -2px rgba(6, 182, 212, 0.08)',
+        'glow-blue': '0 0 25px -4px rgba(37, 99, 235, 0.35)',
+        'glow-cyan': '0 0 25px -4px rgba(6, 182, 212, 0.4)',
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
       },
       borderRadius: {
         'xl': '0.875rem',
         '2xl': '1.25rem',
         '3xl': '1.75rem',
+      },
+      backgroundImage: {
+        'gradient-cyan-blue': 'linear-gradient(135deg, #06B6D4 0%, #2563EB 100%)',
+        'gradient-blue-cyan': 'linear-gradient(135deg, #2563EB 0%, #06B6D4 100%)',
+        'gradient-hero': 'linear-gradient(180deg, #F0F7FF 0%, #FFFFFF 100%)',
+        'gradient-hero-dark': 'linear-gradient(180deg, #0B132B 0%, #090E1A 100%)',
       }
     },
   },

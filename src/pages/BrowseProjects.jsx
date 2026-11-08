@@ -3,15 +3,15 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { 
   Search, 
   Briefcase, 
-  Filter, 
   RotateCcw, 
   Clock, 
   MapPin, 
-  ArrowLeft, 
+  ArrowRight, 
   PlusCircle, 
   DollarSign, 
   Layers,
-  ArrowUpDown
+  ArrowUpDown,
+  Sparkles
 } from 'lucide-react';
 import Layout from '../components/Layout';
 import { 
@@ -75,31 +75,35 @@ export default function BrowseProjects() {
 
   return (
     <Layout>
-      <div className="py-8 sm:py-12">
+      <div className="py-8 sm:py-12 bg-slate-50/60 dark:bg-slate-950/40 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 text-right">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 text-left">
             <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200/60 dark:border-cyan-800/60 text-xs font-semibold mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-cyan-500" />
+                <span>Verified Engineering Opportunities</span>
+              </div>
               <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                المشاريع والفرص الهندسية المفتوحة
+                Explore Engineering Projects
               </h1>
               <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
-                تصفح المشاريع الهندسية المطروحة من العملاء والشركات، وقدّم عروضك الهندسية المتخصصة.
+                Browse open tenders and projects posted by clients and companies, submit technical proposals, and deliver expert engineering work.
               </p>
             </div>
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white text-xs sm:text-sm font-bold shadow-md shadow-brand-blue/20 transition-all self-start sm:self-center shrink-0"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-500/20 transition-all self-start sm:self-center shrink-0"
             >
               <PlusCircle className="w-4 h-4" />
-              <span>نشر مشروع هندسي جديد</span>
+              <span>Post a Project</span>
             </Link>
           </div>
 
           {/* Search and Filters Bar */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/90 dark:border-slate-800 shadow-sm mb-8 flex flex-col md:flex-row items-center gap-3 text-right">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/90 dark:border-slate-800 shadow-sm mb-8 flex flex-col md:flex-row items-center gap-3 text-left">
             <div className="relative flex-1 w-full">
-              <Search className="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={search}
@@ -107,8 +111,8 @@ export default function BrowseProjects() {
                   setSearch(e.target.value);
                   setCurrentPage(1);
                 }}
-                placeholder="ابحث في عنوان المشروع، المتطلبات، أو المهارات المطلوبة..."
-                className="w-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl pr-11 pl-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue"
+                placeholder="Search by project title, requirements, or required skills..."
+                className="w-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl pl-11 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
               />
             </div>
 
@@ -120,9 +124,9 @@ export default function BrowseProjects() {
                   setSelectedCategory(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-200 outline-none font-medium cursor-pointer"
+                className="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-200 outline-none font-medium cursor-pointer focus:border-cyan-500"
               >
-                <option value="all">كل التخصصات الهندسية</option>
+                <option value="all">All Engineering Disciplines</option>
                 {ENGINEERING_CATEGORIES.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}
@@ -137,10 +141,10 @@ export default function BrowseProjects() {
                   setStatusFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-200 outline-none font-medium cursor-pointer"
+                className="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-200 outline-none font-medium cursor-pointer focus:border-cyan-500"
               >
-                <option value="open">المشاريع المفتوحة للعروض فقط</option>
-                <option value="all">جميع الحالات</option>
+                <option value="open">Open for Proposals</option>
+                <option value="all">All Statuses</option>
               </select>
 
               {/* Sort */}
@@ -151,9 +155,9 @@ export default function BrowseProjects() {
                   onChange={(e) => setSortBy(e.target.value)}
                   className="bg-transparent text-slate-700 dark:text-slate-200 outline-none cursor-pointer font-medium"
                 >
-                  <option value="newest">الأحدث نشرًا</option>
-                  <option value="budget-desc">الميزانية: من الأعلى للأقل</option>
-                  <option value="budget-asc">الميزانية: من الأقل للأعلى</option>
+                  <option value="newest">Newest First</option>
+                  <option value="budget-desc">Budget: High to Low</option>
+                  <option value="budget-asc">Budget: Low to High</option>
                 </select>
               </div>
 
@@ -161,8 +165,8 @@ export default function BrowseProjects() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="p-2 rounded-xl text-slate-500 hover:text-brand-blue dark:hover:text-brand-cyan hover:bg-slate-100 dark:hover:bg-slate-800 transition"
-                  title="إعادة ضبط الفلاتر"
+                  className="p-2 rounded-xl text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  title="Reset Filters"
                 >
                   <RotateCcw className="w-4 h-4" />
                 </button>
@@ -171,29 +175,29 @@ export default function BrowseProjects() {
           </div>
 
           {/* Results Counter */}
-          <div className="text-right text-xs text-slate-500 dark:text-slate-400 mb-4 px-1">
-            <span>تم العثور على {filteredProjects.length} مشروع</span>
+          <div className="text-left text-xs text-slate-500 dark:text-slate-400 mb-4 px-1">
+            <span>Found <strong className="text-slate-800 dark:text-slate-200">{filteredProjects.length}</strong> projects</span>
           </div>
 
           {/* Projects List */}
           {filteredProjects.length === 0 ? (
             <div className="bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-brand-blue flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-cyan-400 flex items-center justify-center mx-auto mb-4">
                 <Briefcase className="w-8 h-8" />
               </div>
               <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">
-                لا توجد مشاريع تطابق خيارات البحث الحالية
+                No projects match your current filters
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto mt-1 mb-6">
-                يمكنك نشر مشروعك الآن أو إعادة ضبط الفلاتر للاطلاع على كل الفرص.
+                Try adjusting your search criteria or reset filters to browse all engineering opportunities.
               </p>
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-blue text-white text-xs font-bold shadow-sm"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition"
               >
                 <RotateCcw className="w-4 h-4" />
-                <span>إعادة ضبط الفلاتر</span>
+                <span>Reset Filters</span>
               </button>
             </div>
           ) : (
@@ -201,31 +205,31 @@ export default function BrowseProjects() {
               {paginatedProjects.map((proj) => (
                 <div
                   key={proj.id}
-                  className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-card hover:shadow-card-hover hover:border-brand-blue/30 dark:hover:border-brand-blue/40 transition-all text-right"
+                  className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-card hover:shadow-card-hover hover:border-blue-400/50 dark:hover:border-cyan-400/40 transition-all text-left"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
                     {/* Project Information */}
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-2 mb-2.5">
-                        <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-brand-blue dark:bg-blue-950/60 dark:text-brand-cyan border border-blue-200/60 dark:border-blue-900/60">
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-cyan-50 text-cyan-700 dark:bg-cyan-950/60 dark:text-cyan-300 border border-cyan-200/60 dark:border-cyan-800/60">
                           {SPECIALTY_LABELS[proj.category] || proj.category}
                         </span>
                         <span
                           className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
                             proj.status === 'open'
-                              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300'
-                              : 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300'
+                              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-900/60'
+                              : 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200/60 dark:border-amber-900/60'
                           }`}
                         >
-                          {proj.status === 'open' ? 'مفتوح لتقديم العروض' : 'قيد التنفيذ'}
+                          {proj.status === 'open' ? 'Open for Proposals' : 'In Progress'}
                         </span>
-                        <span className="text-xs text-slate-400 flex items-center gap-1 mr-2">
-                          <Clock className="w-3.5 h-3.5" />
-                          <span>مدة التسليم: {proj.duration}</span>
+                        <span className="text-xs text-slate-400 flex items-center gap-1 ml-2">
+                          <Clock className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+                          <span>Delivery: {proj.duration}</span>
                         </span>
                         {proj.clientCity && (
                           <span className="text-xs text-slate-400 flex items-center gap-1">
-                            <MapPin className="w-3.5 h-3.5" />
+                            <MapPin className="w-3.5 h-3.5 text-blue-500" />
                             <span>{proj.clientCity}</span>
                           </span>
                         )}
@@ -233,7 +237,7 @@ export default function BrowseProjects() {
 
                       <Link
                         to={`/project/${proj.id}`}
-                        className="text-lg font-bold text-slate-900 dark:text-white hover:text-brand-blue dark:hover:text-brand-cyan transition-colors block mb-2"
+                        className="text-lg font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-cyan-400 transition-colors block mb-2"
                       >
                         {proj.title}
                       </Link>
@@ -244,11 +248,11 @@ export default function BrowseProjects() {
 
                       {/* Required skills */}
                       <div className="flex flex-wrap gap-1.5 items-center">
-                        <span className="text-xs font-semibold text-slate-400 ml-1">المهارات:</span>
+                        <span className="text-xs font-semibold text-slate-400 mr-1">Skills:</span>
                         {(proj.requiredSkills || []).map((skill, idx) => (
                           <span
                             key={idx}
-                            className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium"
+                            className="text-xs px-2.5 py-1 rounded-lg bg-blue-50/60 dark:bg-slate-800 text-blue-800 dark:text-blue-200 border border-blue-100 dark:border-slate-700 font-medium"
                           >
                             {skill}
                           </span>
@@ -257,24 +261,24 @@ export default function BrowseProjects() {
                     </div>
 
                     {/* Price and CTA Column */}
-                    <div className="lg:border-r lg:border-slate-100 lg:dark:border-slate-800/80 lg:pr-6 flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
-                      <div className="text-right">
-                        <span className="text-xs text-slate-400 block">الميزانية المقترحة</span>
+                    <div className="lg:border-l lg:border-slate-100 lg:dark:border-slate-800/80 lg:pl-6 flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
+                      <div className="text-left lg:text-right">
+                        <span className="text-xs text-slate-400 block font-medium">Estimated Budget</span>
                         <div className="text-xl font-black text-slate-900 dark:text-white">
-                          {proj.budget.toLocaleString()}{' '}
-                          <span className="text-xs font-normal text-slate-500">ج.م</span>
+                          ${proj.budget.toLocaleString()}{' '}
+                          <span className="text-xs font-normal text-slate-500">USD</span>
                         </div>
-                        <span className="text-[11px] text-brand-blue dark:text-brand-cyan font-semibold block mt-0.5">
-                          {proj.proposalsCount || 0} عروض مقدمة
+                        <span className="text-[11px] text-cyan-600 dark:text-cyan-400 font-semibold block mt-0.5">
+                          {proj.proposalsCount || 0} proposals submitted
                         </span>
                       </div>
 
                       <Link
                         to={`/project/${proj.id}`}
-                        className="inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white text-xs font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+                        className="inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
                       >
-                        <span>تقديم عرض / تفاصيل</span>
-                        <ArrowLeft className="w-3.5 h-3.5" />
+                        <span>View Details & Bid</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
@@ -290,16 +294,16 @@ export default function BrowseProjects() {
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 disabled:opacity-40 hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
-                    السابق
+                    Previous
                   </button>
                   {Array.from({ length: totalPages }).map((_, idx) => (
                     <button
                       key={idx + 1}
                       type="button"
                       onClick={() => setCurrentPage(idx + 1)}
-                      className={`w-9 h-9 rounded-xl text-xs font-bold ${
+                      className={`w-9 h-9 rounded-xl text-xs font-bold transition ${
                         currentPage === idx + 1
-                          ? 'bg-brand-blue text-white shadow-sm'
+                          ? 'bg-blue-600 text-white shadow-sm'
                           : 'border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                       }`}
                     >
@@ -312,7 +316,7 @@ export default function BrowseProjects() {
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 disabled:opacity-40 hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
-                    التالي
+                    Next
                   </button>
                 </div>
               )}

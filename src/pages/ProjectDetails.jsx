@@ -72,13 +72,13 @@ export default function ProjectDetails() {
     return (
       <Layout>
         <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-xl font-bold text-slate-800 dark:text-white">المشروع غير موجود</h2>
-          <p className="text-xs text-slate-500 mt-1 mb-6">قد يكون تم حذفه أو أن الرابط غير صحيح.</p>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Project Not Found</h2>
+          <p className="text-xs text-slate-500 mt-1 mb-6">This project may have been deleted or the link is invalid.</p>
           <Link
             to="/projects"
-            className="px-5 py-2.5 rounded-xl bg-brand-blue text-white text-xs font-bold"
+            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm"
           >
-            العودة للمشاريع
+            Back to All Projects
           </Link>
         </div>
       </Layout>
@@ -92,7 +92,7 @@ export default function ProjectDetails() {
   const handleProposalSubmit = (e) => {
     e.preventDefault();
     if (!proposalForm.proposedBudget || !proposalForm.deliveryDays || !proposalForm.coverLetter) {
-      setFeedback({ type: 'error', text: 'يرجى استكمال جميع بيانات العرض.' });
+      setFeedback({ type: 'error', text: 'Please fill in all proposal fields.' });
       return;
     }
 
@@ -110,7 +110,7 @@ export default function ProjectDetails() {
         coverLetter: proposalForm.coverLetter.trim(),
       });
 
-      setFeedback({ type: 'success', text: 'تم إرسال عرضك بنجاح لصاحب المشروع!' });
+      setFeedback({ type: 'success', text: 'Your proposal was submitted successfully to the project owner!' });
       setIsModalOpen(false);
       loadProjectData();
     } catch (err) {
@@ -124,7 +124,7 @@ export default function ProjectDetails() {
   const handleAcceptProposal = (propId) => {
     try {
       updateProposalStatus(propId, 'accepted');
-      setFeedback({ type: 'success', text: 'تم قبول العرض وتحويل المشروع إلى قيد التنفيذ!' });
+      setFeedback({ type: 'success', text: 'Proposal accepted! Project is now in progress.' });
       loadProjectData();
     } catch (err) {
       setFeedback({ type: 'error', text: err.message });
@@ -135,7 +135,7 @@ export default function ProjectDetails() {
   const handleRejectProposal = (propId) => {
     try {
       updateProposalStatus(propId, 'rejected');
-      setFeedback({ type: 'info', text: 'تم رفض العرض.' });
+      setFeedback({ type: 'info', text: 'Proposal has been rejected.' });
       loadProjectData();
     } catch (err) {
       setFeedback({ type: 'error', text: err.message });
@@ -154,25 +154,25 @@ export default function ProjectDetails() {
 
   return (
     <Layout>
-      <div className="py-8 sm:py-12">
+      <div className="py-8 sm:py-12 bg-slate-50/60 dark:bg-slate-950/40 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb / Back Link */}
           <div className="mb-6 flex items-center justify-between">
             <Link
               to="/projects"
-              className="text-xs font-semibold text-brand-blue dark:text-brand-cyan hover:underline flex items-center gap-1"
+              className="text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5"
             >
-              <ArrowLeft className="w-4 h-4 rotate-180" />
-              <span>العودة لكافة المشاريع</span>
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to all projects</span>
             </Link>
             <span
-              className={`text-xs font-bold px-3 py-1 rounded-full ${
+              className={`text-xs font-bold px-3 py-1 rounded-full border ${
                 project.status === 'open'
-                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300'
-                  : 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300'
+                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900/60'
+                  : 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border-amber-200 dark:border-amber-900/60'
               }`}
             >
-              {project.status === 'open' ? 'مفتوح لتلقي العروض' : 'المشروع قيد التنفيذ'}
+              {project.status === 'open' ? 'Open for Proposals' : 'In Progress'}
             </span>
           </div>
 
@@ -180,8 +180,8 @@ export default function ProjectDetails() {
             <div
               className={`p-4 rounded-xl text-xs font-bold mb-6 flex items-center gap-2 ${
                 feedback.type === 'success'
-                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                  : 'bg-red-50 text-red-800 border border-red-200'
+                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
+                  : 'bg-red-50 text-red-800 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800'
               }`}
             >
               <CheckCircle2 className="w-4 h-4 shrink-0" />
@@ -191,15 +191,15 @@ export default function ProjectDetails() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             {/* Main Project Details (2 Cols) */}
-            <div className="lg:col-span-2 space-y-6 text-right">
+            <div className="lg:col-span-2 space-y-6 text-left">
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
                 <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <span className="px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 text-brand-blue dark:bg-blue-950/60 dark:text-brand-cyan">
+                  <span className="px-3 py-1 rounded-lg text-xs font-bold bg-cyan-50 text-cyan-700 dark:bg-cyan-950/60 dark:text-cyan-300 border border-cyan-200/60 dark:border-cyan-800/60">
                     {SPECIALTY_LABELS[project.category] || project.category}
                   </span>
                   <span className="text-xs text-slate-400">
-                    تاريخ النشر:{' '}
-                    {new Date(project.createdAt).toLocaleDateString('ar-EG', {
+                    Posted on:{' '}
+                    {new Date(project.createdAt).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
@@ -213,7 +213,7 @@ export default function ProjectDetails() {
 
                 <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
                   <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">
-                    تفاصيل ومتطلبات المشروع:
+                    Project Specifications & Scope:
                   </h3>
                   <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                     {project.description}
@@ -223,13 +223,13 @@ export default function ProjectDetails() {
                 {/* Required Skills */}
                 <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
                   <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3">
-                    المهارات والخبرات المطلوبة:
+                    Required Skills & Engineering Competencies:
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {(project.requiredSkills || []).map((skill, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold"
+                        className="px-3 py-1.5 rounded-xl bg-blue-50/70 dark:bg-slate-800 text-blue-800 dark:text-blue-200 text-xs font-semibold border border-blue-100 dark:border-slate-700"
                       >
                         {skill}
                       </span>
@@ -238,20 +238,20 @@ export default function ProjectDetails() {
                 </div>
               </div>
 
-              {/* Proposals Management Section (Visible to Owner & Applied Engineers) */}
+              {/* Proposals Management Section */}
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
                   <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                    العروض المقدمة على المشروع ({proposals.length})
+                    Submitted Proposals ({proposals.length})
                   </h2>
-                  <span className="text-xs text-slate-400">
-                    {isOwner ? 'أنت صاحب هذا المشروع' : 'مقدمة من مهندسين معتمدين'}
+                  <span className="text-xs text-slate-400 font-medium">
+                    {isOwner ? 'You are the owner of this project' : 'Submitted by verified engineers'}
                   </span>
                 </div>
 
                 {proposals.length === 0 ? (
                   <p className="text-xs text-slate-400 text-center py-8">
-                    لم يتم تقديم أي عروض حتى الآن. كن أول من يقدم عرضاً هندسياً!
+                    No proposals submitted yet. Be the first certified engineer to submit an offer!
                   </p>
                 ) : (
                   <div className="space-y-4">
@@ -266,13 +266,13 @@ export default function ProjectDetails() {
                       >
                         <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
                           <div className="flex items-start gap-3">
-                            <div className="w-10 h-10 rounded-full bg-brand-blue text-white text-xs font-bold flex items-center justify-center shrink-0">
-                              {prop.engineerName.charAt(0)}
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-500 text-white text-xs font-bold flex items-center justify-center shrink-0 shadow-sm">
+                              {prop.engineerName ? prop.engineerName.charAt(0) : 'E'}
                             </div>
                             <div>
                               <Link
                                 to={`/engineer/${prop.engineerId}`}
-                                className="text-sm font-bold text-slate-900 dark:text-white hover:text-brand-blue transition"
+                                className="text-sm font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-cyan-400 transition"
                               >
                                 {prop.engineerName}
                               </Link>
@@ -286,13 +286,13 @@ export default function ProjectDetails() {
                           </div>
 
                           <div className="text-left sm:text-right">
-                            <span className="text-xs text-slate-400">العرض المالي</span>
+                            <span className="text-xs text-slate-400 block font-medium">Bid Amount</span>
                             <div className="text-base font-extrabold text-slate-900 dark:text-white">
-                              {prop.proposedBudget.toLocaleString()}{' '}
-                              <span className="text-xs font-normal text-slate-500">ج.م</span>
+                              ${prop.proposedBudget.toLocaleString()}{' '}
+                              <span className="text-xs font-normal text-slate-500">USD</span>
                             </div>
                             <span className="text-xs text-slate-500 dark:text-slate-400 block">
-                              مدة التنفيذ: {prop.deliveryDays} أيام
+                              Duration: {prop.deliveryDays} days
                             </span>
                           </div>
                         </div>
@@ -308,26 +308,26 @@ export default function ProjectDetails() {
                             <button
                               type="button"
                               onClick={() => handleAcceptProposal(prop.id)}
-                              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm"
+                              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm transition"
                             >
                               <Check className="w-3.5 h-3.5" />
-                              <span>قبول العرض</span>
+                              <span>Accept Offer</span>
                             </button>
                             <button
                               type="button"
                               onClick={() => handleRejectProposal(prop.id)}
-                              className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1"
+                              className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1 transition"
                             >
                               <X className="w-3.5 h-3.5" />
-                              <span>رفض</span>
+                              <span>Decline</span>
                             </button>
                             <button
                               type="button"
                               onClick={() => handleStartChat(prop.engineerId, prop.engineerName)}
-                              className="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 text-xs font-semibold flex items-center gap-1"
+                              className="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold flex items-center gap-1 transition"
                             >
                               <MessageSquare className="w-3.5 h-3.5" />
-                              <span>محادثة</span>
+                              <span>Chat</span>
                             </button>
                           </div>
                         )}
@@ -335,7 +335,7 @@ export default function ProjectDetails() {
                         {prop.status === 'accepted' && (
                           <div className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                             <CheckCircle2 className="w-4 h-4" />
-                            <span>تم قبول هذا العرض للبدء في المشروع!</span>
+                            <span>This proposal has been accepted! Project is currently in progress.</span>
                           </div>
                         )}
                       </div>
@@ -346,33 +346,33 @@ export default function ProjectDetails() {
             </div>
 
             {/* Sidebar: Budget, Client Info & CTAs */}
-            <aside className="space-y-6 text-right">
+            <aside className="space-y-6 text-left">
               {/* Project Overview Card */}
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-card">
-                <span className="text-xs text-slate-400 block mb-1">الميزانية المرصودة</span>
+                <span className="text-xs text-slate-400 block mb-1 font-medium">Estimated Project Budget</span>
                 <div className="text-3xl font-black text-slate-900 dark:text-white mb-4">
-                  {project.budget.toLocaleString()}{' '}
-                  <span className="text-sm font-semibold text-slate-500">ج.م</span>
+                  ${project.budget.toLocaleString()}{' '}
+                  <span className="text-sm font-semibold text-slate-500">USD</span>
                 </div>
 
                 <div className="space-y-3 text-xs pt-4 border-t border-slate-100 dark:border-slate-800">
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">المدة المتوقعة:</span>
+                    <span className="text-slate-500 dark:text-slate-400">Estimated Duration:</span>
                     <span className="font-bold text-slate-800 dark:text-slate-200">{project.duration}</span>
                   </div>
                   {project.deadline && (
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-500 dark:text-slate-400">الموعد النهائي:</span>
+                      <span className="text-slate-500 dark:text-slate-400">Deadline:</span>
                       <span className="font-bold text-slate-800 dark:text-slate-200">{project.deadline}</span>
                     </div>
                   )}
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">صاحب المشروع:</span>
+                    <span className="text-slate-500 dark:text-slate-400">Client:</span>
                     <span className="font-bold text-slate-800 dark:text-slate-200">{project.clientName}</span>
                   </div>
                   {project.clientCity && (
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-500 dark:text-slate-400">المدينة / الدولة:</span>
+                      <span className="text-slate-500 dark:text-slate-400">Location:</span>
                       <span className="font-bold text-slate-800 dark:text-slate-200">{project.clientCity}</span>
                     </div>
                   )}
@@ -382,17 +382,17 @@ export default function ProjectDetails() {
                 {isEngineer && project.status === 'open' && (
                   <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
                     {hasAlreadyApplied ? (
-                      <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-brand-blue dark:text-brand-cyan text-xs font-bold text-center">
-                        ✓ لقد قمت بتقديم عرضك بالفعل
+                      <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 text-xs font-bold text-center border border-blue-200 dark:border-blue-900/60">
+                        ✓ You have already submitted a proposal
                       </div>
                     ) : (
                       <button
                         type="button"
                         onClick={() => setIsModalOpen(true)}
-                        className="w-full py-3.5 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white text-xs font-bold shadow-md shadow-brand-blue/20 transition-all flex items-center justify-center gap-2"
+                        className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs font-bold shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <Send className="w-4 h-4" />
-                        <span>قدّم عرضك الآن</span>
+                        <span>Submit a Proposal</span>
                       </button>
                     )}
                   </div>
@@ -400,12 +400,12 @@ export default function ProjectDetails() {
 
                 {!isAuthenticated && (
                   <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
-                    <p className="text-xs text-slate-500 mb-3">سجّل كمهندس لتقديم عرضك الفني والمالي</p>
+                    <p className="text-xs text-slate-500 mb-3">Sign in as an engineer to submit technical and financial proposals.</p>
                     <Link
                       to="/login"
-                      className="block w-full py-2.5 rounded-xl bg-brand-blue text-white text-xs font-bold"
+                      className="block w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition"
                     >
-                      تسجيل الدخول لتقديم عرض
+                      Sign In to Submit Proposal
                     </Link>
                   </div>
                 )}
@@ -415,9 +415,9 @@ export default function ProjectDetails() {
               {matchingEngineers.length > 0 && (
                 <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-card">
                   <div className="flex items-center gap-2 mb-4">
-                    <Sparkles className="w-4 h-4 text-brand-cyan" />
+                    <Sparkles className="w-4 h-4 text-cyan-500" />
                     <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
-                      ترشيحات الذكاء الاصطناعي للمشروع
+                      AI Matched Engineers
                     </h3>
                   </div>
 
@@ -425,36 +425,36 @@ export default function ProjectDetails() {
                     {matchingEngineers.map(({ engineer, matchScore, reasons }) => (
                       <div
                         key={engineer.id}
-                        className="p-3.5 rounded-xl bg-brand-bg dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700"
+                        className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700"
                       >
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-950/80 dark:text-cyan-300">
-                            تطابق {matchScore}%
-                          </span>
                           <Link
                             to={`/engineer/${engineer.id}`}
-                            className="text-xs font-bold text-slate-900 dark:text-white hover:text-brand-blue"
+                            className="text-xs font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-cyan-400"
                           >
                             {engineer.fullName}
                           </Link>
+                          <span className="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-950/80 dark:text-cyan-300">
+                            {matchScore}% Match
+                          </span>
                         </div>
                         <ul className="text-[11px] text-slate-500 dark:text-slate-400 space-y-1 mb-2">
                           {reasons.slice(0, 2).map((r, i) => (
                             <li key={i} className="flex items-center gap-1">
-                              <CheckCircle2 className="w-3 h-3 text-brand-cyan shrink-0" />
+                              <CheckCircle2 className="w-3 h-3 text-cyan-500 shrink-0" />
                               <span>{r}</span>
                             </li>
                           ))}
                         </ul>
                         <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200/60 dark:border-slate-700">
                           <span className="font-semibold text-slate-700 dark:text-slate-300">
-                            {engineer.hourlyRate} ج.م/ساعة
+                            ${engineer.hourlyRate}/hr
                           </span>
                           <Link
                             to={`/engineer/${engineer.id}`}
-                            className="text-brand-blue dark:text-brand-cyan font-bold hover:underline"
+                            className="text-blue-600 dark:text-cyan-400 font-bold hover:underline"
                           >
-                            عرض الملف ←
+                            View Profile →
                           </Link>
                         </div>
                       </div>
@@ -474,15 +474,18 @@ export default function ProjectDetails() {
             className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
             onClick={() => setIsModalOpen(false)}
           />
-          <div className="relative w-full max-w-xl bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 text-right animate-in fade-in duration-150">
+          <div className="relative w-full max-w-xl bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 text-left animate-in fade-in duration-150 border border-slate-200 dark:border-slate-800">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                تقديم عرض هندسي على المشروع
-              </h3>
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                  Submit Engineering Proposal
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Offer your rate, timeline, and work methodology</p>
+              </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white transition"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -492,7 +495,7 @@ export default function ProjectDetails() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                    الميزانية المقترحة (ج.م) *
+                    Proposed Budget ($ USD) *
                   </label>
                   <input
                     type="number"
@@ -501,31 +504,31 @@ export default function ProjectDetails() {
                     onChange={(e) =>
                       setProposalForm({ ...proposalForm, proposedBudget: e.target.value })
                     }
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                    مدة التسليم (أيام) *
+                    Delivery Time (Days) *
                   </label>
                   <input
                     type="number"
                     required
                     min="1"
-                    placeholder="مثال: 7"
+                    placeholder="e.g. 7"
                     value={proposalForm.deliveryDays}
                     onChange={(e) =>
                       setProposalForm({ ...proposalForm, deliveryDays: e.target.value })
                     }
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                  تفاصيل العرض الفني ورسالة التغطية (Cover Letter) *
+                  Proposal Cover Letter & Methodology *
                 </label>
                 <textarea
                   required
@@ -534,8 +537,8 @@ export default function ProjectDetails() {
                   onChange={(e) =>
                     setProposalForm({ ...proposalForm, coverLetter: e.target.value })
                   }
-                  placeholder="وضح خبرتك في هذا النوع من المشاريع، خطوات التنفيذ، البرامج الهندسية التي ستستخدمها، وما تقدمه للعميل..."
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs sm:text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                  placeholder="Outline your engineering background, project execution plan, CAD/BIM tools to be used, and deliverables for the client..."
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs sm:text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -543,16 +546,16 @@ export default function ProjectDetails() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 py-3 rounded-xl bg-brand-blue text-white text-xs font-bold shadow-md hover:bg-brand-blueHover transition disabled:opacity-50"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs font-bold shadow-md shadow-blue-500/20 transition disabled:opacity-50"
                 >
-                  {loading ? 'جاري الإرسال...' : 'تأكيد وإرسال العرض'}
+                  {loading ? 'Submitting...' : 'Confirm & Submit Proposal'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-300"
+                  className="px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 transition"
                 >
-                  إلغاء
+                  Cancel
                 </button>
               </div>
             </form>

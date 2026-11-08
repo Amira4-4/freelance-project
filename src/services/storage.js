@@ -1,74 +1,74 @@
-const STORAGE_KEY = 'freelanser_data';
+const STORAGE_KEY = 'freelanser_data_v2_en';
 
-// Engineering categories definition with icons and Arabic labels
+// Engineering categories definition with Lucide icon names and English labels
 export const ENGINEERING_CATEGORIES = [
-  { id: 'civil', name: 'هندسة مدنية وإنشائية', nameEn: 'Civil & Structural', icon: 'Building2', count: 120 },
-  { id: 'architecture', name: 'هندسة معمارية وتخطيط', nameEn: 'Architecture & Planning', icon: 'Compass', count: 95 },
-  { id: 'mechanical', name: 'هندسة ميكانيكية وHVAC', nameEn: 'Mechanical & MEP', icon: 'Wrench', count: 78 },
-  { id: 'electrical', name: 'هندسة كهربائية وتيار خفيف', nameEn: 'Electrical & Power', icon: 'Zap', count: 85 },
-  { id: 'interior', name: 'تصميم داخلي وديكور', nameEn: 'Interior Design', icon: 'Home', count: 64 },
-  { id: 'structural', name: 'دراسات تربة وفحص منشآت', nameEn: 'Geotechnical & Structural', icon: 'ShieldCheck', count: 42 },
-  { id: 'software', name: 'برمجيات ونظم مدمجة IoT', nameEn: 'Software & Embedded', icon: 'Code2', count: 110 },
-  { id: 'environmental', name: 'طاقة متجددة وبيئة', nameEn: 'Renewable & Environmental', icon: 'Leaf', count: 36 },
+  { id: 'civil', name: 'Civil & Structural Engineering', nameEn: 'Civil & Structural', icon: 'Building2', count: 128 },
+  { id: 'architecture', name: 'Architecture & Urban Planning', nameEn: 'Architecture & Planning', icon: 'Compass', count: 96 },
+  { id: 'mechanical', name: 'Mechanical & HVAC Engineering', nameEn: 'Mechanical & MEP', icon: 'Wrench', count: 82 },
+  { id: 'electrical', name: 'Electrical & Power Systems', nameEn: 'Electrical & Power', icon: 'Zap', count: 88 },
+  { id: 'interior', name: 'Interior & Spatial Design', nameEn: 'Interior Design', icon: 'Home', count: 74 },
+  { id: 'structural', name: 'Geotechnical & Site Integrity', nameEn: 'Geotechnical & Structural', icon: 'ShieldCheck', count: 46 },
+  { id: 'software', name: 'Software & Embedded IoT', nameEn: 'Software & IoT', icon: 'Code2', count: 114 },
+  { id: 'environmental', name: 'Renewable Energy & Sustainability', nameEn: 'Renewable Energy', icon: 'Leaf', count: 39 },
 ];
 
 export const SPECIALTY_LABELS = {
-  civil: 'مهندس مدني وإنشائي',
-  architecture: 'مهندس معماري ومصمم واجهات',
-  mechanical: 'مهندس ميكانيكا وHVAC',
-  electrical: 'مهندس كهرباء وتيار خفيف',
-  interior: 'مهندس تصميم داخلي وديكور',
-  structural: 'مهندس إنشائي وفحص منشآت',
-  software: 'مهندس برمجيات ونظم ذكية',
-  environmental: 'مهندس طاقة متجددة وبيئة',
-  frontend: 'مهندس Front-End',
-  backend: 'مهندس Back-End',
-  fullstack: 'مهندس Full-Stack',
-  mobile: 'مهندس تطبيقات Mobile',
-  devops: 'مهندس DevOps وسحابيات',
-  ai: 'مهندس ذكاء اصطناعي وتعلم آلة',
-  data: 'مهندس علم بيانات وتحليل',
-  other: 'مهندس متخصص',
+  civil: 'Civil & Structural Consultant',
+  architecture: 'Architectural & Facade Designer',
+  mechanical: 'Mechanical & MEP Consultant',
+  electrical: 'Electrical & Power Engineer',
+  interior: 'Interior & Architectural Designer',
+  structural: 'Structural Integrity & Soil Engineer',
+  software: 'Software & Industrial IoT Engineer',
+  environmental: 'Renewable & Environmental Consultant',
+  frontend: 'Front-End Engineer',
+  backend: 'Back-End Engineer',
+  fullstack: 'Full-Stack Engineer',
+  mobile: 'Mobile App Engineer',
+  devops: 'DevOps & Cloud Architect',
+  ai: 'AI & Machine Learning Engineer',
+  data: 'Data Scientist & Analytics',
+  other: 'Specialized Engineering Consultant',
 };
 
-// Rich Seed Data
+// Rich English Seed Data
 const initialEngineers = [
   {
     id: 'eng-1',
-    fullName: 'م. أحمد كمال عبد العزيز',
+    fullName: 'Eng. Ahmed Kamal, PE',
     email: 'ahmed.kamal@example.com',
-    phone: '01012345678',
+    phone: '+20 101 234 5678',
     password: 'password123',
     specialty: 'civil',
-    hourlyRate: 350,
-    experience: 8,
-    bio: 'مهندس مدني استشاري معتمد لدى نقابة المهندسين المصرية. خبرة أكثر من 8 سنوات في التصميم الإنشائي للأبراج السكنية والمصانع وإعداد النوت الحسابية وجداول حصر الكميات باستخدام ETABS, SAP2000, SAFE وRevit Structure.',
-    skills: ['ETABS', 'SAP2000', 'Revit Structure', 'حساب كميات', 'تصميم خرسانة مسلحة', 'إشراف هندسي', 'AutoCAD'],
+    hourlyRate: 75,
+    experience: 9,
+    bio: 'Licensed Senior Structural Consultant with over 9 years of expertise in high-rise residential towers, industrial warehouses, and seismic analysis. Proficient in ETABS, SAP2000, SAFE, and Revit Structure with proven track record of reducing structural steel costs by up to 14%.',
+    skills: ['ETABS', 'SAP2000', 'Revit Structure', 'Quantity Surveying', 'Reinforced Concrete', 'Seismic Design', 'AutoCAD'],
     linkedin: 'https://linkedin.com/in/ahmed-kamal',
     github: 'https://github.com/ahmed-kamal',
     status: 'approved',
     rating: 4.9,
-    reviewCount: 28,
+    reviewCount: 34,
     availability: 'available',
-    location: 'القاهرة، مصر',
-    title: 'مهندس مدني استشاري ومصمم إنشائي',
+    location: 'Cairo, Egypt',
+    title: 'Senior Structural & Civil Engineering Consultant',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
     coverImage: 'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?auto=format&fit=crop&w=1200&q=80',
-    completedProjectsCount: 34,
-    profileViews: 1420,
-    certifications: ['عضو نقابة المهندسين المصرية', 'محترف معتمد Autodesk Revit Structural', 'دبلوم التصميم الزلزالي للمنشآت'],
+    completedProjectsCount: 38,
+    profileViews: 1840,
+    certifications: ['Certified Structural Engineer', 'Autodesk Certified Professional - Revit Structure', 'Seismic Design Specialist Certificate'],
     projects: [
       {
-        title: 'برج الأندلس السكني (18 طابقاً)',
-        description: 'تصميم إنشائي كامل ومراجعة أحمال الرياح والزلازل وإعداد اللوحات التنفيذية والنوتة الحسابية المعتمدة.',
+        title: 'Al-Andalus Residential Tower (18 Floors)',
+        description: 'Complete structural calculation notes, lateral wind & seismic verification, full construction drawings in DWG/BIM formats.',
         category: 'civil',
         skills: ['ETABS', 'SAFE', 'Revit Structure'],
         link: 'https://example.com/project-1',
         year: '2025'
       },
       {
-        title: 'مجمع مستودعات وجمالونات العاشر من رمضان',
-        description: 'تصميم قطاعات Steel Structures وحسابات القواعد الخرسانية مع تقليل تكلفة المواد بنسبة 14%.',
+        title: 'Industrial Logistics Park (40,000 sqm)',
+        description: 'Design of long-span steel truss hangars and deep foundation optimization, cutting overall material costs by 12%.',
         category: 'civil',
         skills: ['SAP2000', 'Tekla Structures', 'AutoCAD'],
         link: 'https://example.com/project-2',
@@ -79,42 +79,42 @@ const initialEngineers = [
   },
   {
     id: 'eng-2',
-    fullName: 'م. سارة محمود الشناوي',
+    fullName: 'Eng. Sarah El-Shennawy',
     email: 'sara.shennawy@example.com',
-    phone: '01123456789',
+    phone: '+20 112 345 6789',
     password: 'password123',
     specialty: 'architecture',
-    hourlyRate: 400,
-    experience: 6,
-    bio: 'مهندسة معمارية متخصصة في التصميم المعماري الحديث والواجهات المودرن ومخططات الفلل السكنية المعتمدة طبقا للكود المصري والسعودي. إتقان تام لبرامج Revit Architecture, Lumion, 3ds Max وتقديم رندرات واقعية فائقة الدقة.',
-    skills: ['Revit Architecture', 'Lumion', '3ds Max', 'تصميم معماري', 'واجهات خارجية', 'مخططات تنفيذية', 'Photoshop'],
+    hourlyRate: 85,
+    experience: 7,
+    bio: 'Senior Architectural Designer specializing in contemporary luxury villas, urban landscape, and bioclimatic facade engineering. Expert in Revit Architecture, Lumion, and 3ds Max with ultra-photorealistic 4K visualizations and certified municipal permit documentation.',
+    skills: ['Revit Architecture', 'Lumion', '3ds Max', 'Facade Engineering', 'Sustainable Design', 'Executive Drawings', 'Photoshop'],
     linkedin: 'https://linkedin.com/in/sara-shennawy',
     github: 'https://github.com/sara-arch',
     status: 'approved',
     rating: 5.0,
-    reviewCount: 32,
+    reviewCount: 42,
     availability: 'available',
-    location: 'الإسكندرية، مصر',
-    title: 'مهندسة معمارية ومصممة واجهات وفلل فاخرة',
+    location: 'Alexandria, Egypt',
+    title: 'Senior Architectural Designer & Luxury Villa Specialist',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
     coverImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    completedProjectsCount: 41,
-    profileViews: 1890,
-    certifications: ['عضو نقابة المهندسين المصرية', 'شهادة تصميم معماري مستدام LEED GA', 'Autodesk Certified Professional'],
+    completedProjectsCount: 45,
+    profileViews: 2210,
+    certifications: ['LEED Green Associate', 'Autodesk Certified Professional', 'RIBA International Affiliate'],
     projects: [
       {
-        title: 'فيلا نيوكلاسيك - التجمع الخامس',
-        description: 'تصميم معماري متكامل للفيلا مع لاندسكيب ومخططات رخص البناء ورندرات ليلية ونهارية بدقة 4K.',
+        title: 'Modern Neoclassical Villa - New Cairo',
+        description: 'Comprehensive architectural concept, landscape master plan, and building permit blueprints with 4K day/night renders.',
         category: 'architecture',
         skills: ['Revit', 'Lumion', 'Photoshop'],
         link: 'https://example.com/project-villa',
         year: '2025'
       },
       {
-        title: 'مقر شركة تكنولوجية - العاصمة الإدارية',
-        description: 'تصميم واجهة ذكية زجاجية موفرة للطاقة مع توزيع داخلي Open Space وخدمات مستدامة.',
+        title: 'Tech Campus Headquarters - Smart Village',
+        description: 'Energy-efficient smart glass envelope with modular open-plan layout and green terraces.',
         category: 'architecture',
-        skills: ['Revit Architecture', '3ds Max', 'AutoCAD'],
+        skills: ['Revit Architecture', '3ds Max', 'BIM'],
         link: 'https://example.com/project-hq',
         year: '2024'
       }
@@ -123,32 +123,32 @@ const initialEngineers = [
   },
   {
     id: 'eng-3',
-    fullName: 'م. يوسف طارق المنشاوي',
+    fullName: 'Eng. Youssef Manshawy, MEP',
     email: 'youssef.manshawy@example.com',
-    phone: '01234567890',
+    phone: '+20 123 456 7890',
     password: 'password123',
     specialty: 'mechanical',
-    hourlyRate: 320,
-    experience: 7,
-    bio: 'مهندس ميكانيكا قوى خبير في تصميم أنظمة التكييف المركزي HVAC ومكافحة الحريق Fire Fighting وشبكات التغذية والصرف الصحي للمستشفيات والمباني الإدارية باستخدام HAP, Elite, Revit MEP.',
-    skills: ['HVAC', 'Fire Fighting', 'HAP', 'Revit MEP', 'شبكات صرف وتغذية', 'NFPA', 'حساب أحمال حرارية'],
+    hourlyRate: 70,
+    experience: 8,
+    bio: 'Chartered Mechanical & MEP Consultant with extensive background in centralized HVAC systems, NFPA-compliant fire suppression, and building water infrastructure for healthcare facilities and commercial centers using HAP, Elite, and Revit MEP.',
+    skills: ['HVAC', 'Fire Fighting', 'HAP', 'Revit MEP', 'Plumbing & Drainage', 'NFPA Codes', 'Thermal Load Calculation'],
     linkedin: 'https://linkedin.com/in/youssef-mep',
     github: 'https://github.com/youssef-mep',
     status: 'approved',
     rating: 4.8,
-    reviewCount: 19,
+    reviewCount: 26,
     availability: 'busy',
-    location: 'الجيزة، مصر',
-    title: 'مهندس ميكانيكا استشاري أنظمة MEP ومكافحة حريق',
+    location: 'Giza, Egypt',
+    title: 'Senior MEP & Fire Suppression Systems Consultant',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
     coverImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
-    completedProjectsCount: 26,
-    profileViews: 980,
-    certifications: ['عضو الجمعية الأمريكية لمهندسي التكييف ASHRAE', 'شهادة NFPA لأنظمة الإطفاء'],
+    completedProjectsCount: 31,
+    profileViews: 1150,
+    certifications: ['ASHRAE Certified Member', 'NFPA Fire Protection Specialist', 'Revit MEP Certified'],
     projects: [
       {
-        title: 'نظام HVAC لمستشفى بسعة 120 سرير',
-        description: 'حسابات الأحمال الحرارية بغرف العمليات والعناية المركزة وتصميم مجاري الهواء وفق معايير ASHRAE.',
+        title: '150-Bed Specialized Medical Center HVAC',
+        description: 'Complete thermal modeling for operating suites, negative pressure isolation rooms, and air duct sizing according to ASHRAE 170.',
         category: 'mechanical',
         skills: ['HAP', 'Revit MEP', 'ASHRAE Standards'],
         link: 'https://example.com/project-hospital',
@@ -159,32 +159,32 @@ const initialEngineers = [
   },
   {
     id: 'eng-4',
-    fullName: 'م. مريم حسام الدين',
+    fullName: 'Eng. Mariam Hossam',
     email: 'mariam.hossam@example.com',
-    phone: '01512345678',
+    phone: '+20 151 234 5678',
     password: 'password123',
     specialty: 'interior',
-    hourlyRate: 380,
-    experience: 5,
-    bio: 'مهندسة ديكور وتصميم داخلي حاصلة على جوائز تصميم. متخصصة في الفرش الفندقي، الشقق الدوبلكس والمطاعم والكافيهات مع تقديم جداول خامات دقيقة ومخططات إنارة وجبس بورد تنفيذية.',
-    skills: ['3ds Max', 'V-Ray', 'Corona Renderer', 'تصميم داخلي', 'مخططات إضاءة', 'اختيار خامات', 'AutoCAD'],
+    hourlyRate: 80,
+    experience: 6,
+    bio: 'Award-winning Interior Architect and Spatial Designer. Specializing in luxury hospitality, upscale duplexes, and commercial boutique workspaces. Delivers photorealistic 3D renders, detailed material schedules, ceiling & lighting executive layouts.',
+    skills: ['3ds Max', 'Corona Renderer', 'V-Ray', 'Spatial Planning', 'Lighting Design', 'Material Schedules', 'AutoCAD'],
     linkedin: 'https://linkedin.com/in/mariam-interior',
     github: 'https://github.com/mariam-design',
     status: 'approved',
     rating: 4.9,
-    reviewCount: 24,
+    reviewCount: 31,
     availability: 'available',
-    location: 'القاهرة الجديدة، مصر',
-    title: 'مهندسة تصميم داخلي وديكور ومخططات تنفيذية',
+    location: 'New Cairo, Egypt',
+    title: 'Principal Interior Architect & Spatial Planner',
     avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
     coverImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80',
-    completedProjectsCount: 30,
-    profileViews: 1350,
-    certifications: ['عضو نقابة مصممي الفنون التطبيقية', 'دبلوم الإخراج المعماري الاحترافي V-Ray'],
+    completedProjectsCount: 36,
+    profileViews: 1620,
+    certifications: ['Interior Design Guild Accredited', 'Master of Architectural Visualization'],
     projects: [
       {
-        title: 'تصميم داخلي لمطعم وكافيه بوهيمي بالشيخ زايد',
-        description: 'دراسة كاملة لرحلة العميل والإضاءة وتوزيع المقاعد واختيار خامات مقاومة للحريق.',
+        title: 'Boutique Coffee Roastery & Lounge',
+        description: 'Industrial warm interior concept, bespoke acoustic paneling, full joinery details, and mood lighting design.',
         category: 'interior',
         skills: ['3ds Max', 'Corona', 'Moodboards'],
         link: 'https://example.com/cafe-design',
@@ -195,34 +195,34 @@ const initialEngineers = [
   },
   {
     id: 'eng-5',
-    fullName: 'م. عمر عبد الرحمن الشريف',
+    fullName: 'Eng. Omar El-Sherif',
     email: 'omar.sherif@example.com',
-    phone: '01098765432',
+    phone: '+20 109 876 5432',
     password: 'password123',
     specialty: 'electrical',
-    hourlyRate: 330,
-    experience: 9,
-    bio: 'مهندس كهرباء قوى وتيار خفيف واستشاري أنظمة الطاقة الشمسية الكهروضوئية. خبرة في تصميم لوحات التوزيع MDB/SMDB وأنظمة الإنذار وكاميرات المراقبة وتصميم محطات الطاقة الشمسية On-Grid وOff-Grid.',
-    skills: ['DIALux evo', 'AutoCAD Electrical', 'PVSyst', 'تيار خفيف', 'طاقة شمسية', 'لوحات توزيع', 'BMS'],
+    hourlyRate: 75,
+    experience: 10,
+    bio: 'Principal Power Systems & Solar PV Consultant. Experienced in medium/low voltage distribution networks, main distribution boards (MDB/SMDB), DIALux evo illumination studies, and grid-connected solar power installations.',
+    skills: ['DIALux evo', 'PVSyst', 'AutoCAD Electrical', 'Low Voltage Systems', 'Solar PV Design', 'BMS Integration'],
     linkedin: 'https://linkedin.com/in/omar-electrical',
     github: 'https://github.com/omar-electrical',
     status: 'approved',
     rating: 4.9,
-    reviewCount: 22,
+    reviewCount: 29,
     availability: 'available',
-    location: 'طنطا، مصر',
-    title: 'مهندس كهرباء قوى وتيار خفيف وأنظمة طاقة شمسية',
+    location: 'Tanta, Egypt',
+    title: 'Principal Electrical Engineer & Solar PV Consultant',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
     coverImage: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80',
-    completedProjectsCount: 38,
-    profileViews: 1120,
-    certifications: ['عضو نقابة المهندسين', 'شهادة تصميم محطات طاقة شمسية معتمدة NREA', 'Schneider Electric EcoXpert'],
+    completedProjectsCount: 42,
+    profileViews: 1380,
+    certifications: ['Certified Energy Manager (CEM)', 'Schneider Electric EcoXpert', 'NREA Solar PV Certified'],
     projects: [
       {
-        title: 'محطة طاقة شمسية 250 ك.و لمصنع غذائي',
-        description: 'تصميم المحطة وحسابات العائد الاستثماري وخفض فاتورة الكهرباء الشهرية بنسبة 65%.',
+        title: '300kW Rooftop Solar Installation - Food Processing Plant',
+        description: 'PV system modeling, inverter sizing, grid interconnection study reducing facility grid reliance by 62%.',
         category: 'electrical',
-        skills: ['PVSyst', 'AutoCAD', 'Electrical Sizing'],
+        skills: ['PVSyst', 'AutoCAD Electrical', 'Payback Analysis'],
         link: 'https://example.com/solar-plant',
         year: '2024'
       }
@@ -231,32 +231,32 @@ const initialEngineers = [
   },
   {
     id: 'eng-6',
-    fullName: 'م. خالد إبراهيم سالم',
+    fullName: 'Eng. Khaled Salem',
     email: 'khaled.salem@example.com',
-    phone: '01065432198',
+    phone: '+20 106 543 2198',
     password: 'password123',
     specialty: 'software',
-    hourlyRate: 450,
-    experience: 7,
-    bio: 'مهندس نظم وبرمجيات متقدمة وبناء منصات سحابية وحلول إنترنت الأشياء الصناعية (IIoT). خبرة واسعة في React, Node.js, Python, Docker وهندسة الأنظمة الموزعة الآمنة.',
-    skills: ['React', 'Node.js', 'Python', 'AWS', 'Docker', 'IoT', 'Tailwind CSS', 'PostgreSQL'],
+    hourlyRate: 90,
+    experience: 8,
+    bio: 'Lead Software & Industrial IoT Systems Engineer. Building enterprise cloud platforms, digital twin telemetry, building management systems (BMS), and edge computing solutions using React, Node.js, Python, and MQTT protocols.',
+    skills: ['React', 'Node.js', 'Python', 'AWS Cloud', 'Docker', 'Industrial IoT', 'MQTT', 'PostgreSQL'],
     linkedin: 'https://linkedin.com/in/khaled-salem',
     github: 'https://github.com/khaled-salem',
     status: 'approved',
     rating: 5.0,
-    reviewCount: 35,
+    reviewCount: 38,
     availability: 'available',
-    location: 'المعادي، القاهرة',
-    title: 'Senior Software & IoT Solutions Engineer',
+    location: 'Maadi, Cairo',
+    title: 'Senior Software & Industrial IoT Systems Engineer',
     avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
     coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
-    completedProjectsCount: 45,
-    profileViews: 2100,
-    certifications: ['AWS Certified Solutions Architect', 'Professional Scrum Master PSM I'],
+    completedProjectsCount: 51,
+    profileViews: 2450,
+    certifications: ['AWS Certified Solutions Architect', 'Professional Scrum Master PSM II'],
     projects: [
       {
-        title: 'منصة إدارة استهلاك الطاقة والمعدات الصناعية IoT',
-        description: 'بناء داشبورد تفاعلية آنية ترتبط بمجسات المصنع عبر MQTT وتتنبأ بالأعطال باستخدام الذكاء الاصطناعي.',
+        title: 'Smart Energy & Equipment Telemetry Dashboard',
+        description: 'Real-time telemetry and predictive failure maintenance dashboard connecting 500+ factory sensors.',
         category: 'software',
         skills: ['React', 'Node.js', 'MQTT', 'Python'],
         link: 'https://example.com/iot-platform',
@@ -267,26 +267,26 @@ const initialEngineers = [
   },
   {
     id: 'eng-pending-1',
-    fullName: 'م. مصطفى نور الدين',
+    fullName: 'Eng. Mostafa Nour',
     email: 'mostafa.nour@example.com',
-    phone: '01033445566',
+    phone: '+20 103 344 5566',
     password: 'password123',
     specialty: 'civil',
-    hourlyRate: 280,
+    hourlyRate: 60,
     experience: 4,
-    bio: 'مهندس موقع ومكتب فني متخصص في حساب كميات وإعداد مستخلصات المقاولين والمخططات التنفيذية Shop Drawings.',
-    skills: ['AutoCAD', 'Excel Advanced', 'Shop Drawings', 'حساب كميات'],
+    bio: 'Site & Technical Office Engineer experienced in quantity surveying, contractor invoicing, submittals, and shop drawing production.',
+    skills: ['AutoCAD', 'Advanced Excel', 'Shop Drawings', 'Quantity Surveying'],
     linkedin: 'https://linkedin.com/in/mostafa-nour',
     github: 'https://github.com/mostafa-nour',
     status: 'pending',
     rating: 0,
     reviewCount: 0,
     availability: 'available',
-    location: 'المنصورة، مصر',
-    title: 'مهندس مكتب فني وحصر كميات',
+    location: 'Mansoura, Egypt',
+    title: 'Technical Office & Quantity Surveying Engineer',
     completedProjectsCount: 0,
-    profileViews: 45,
-    certifications: ['عضو نقابة المهندسين'],
+    profileViews: 65,
+    certifications: ['Registered Professional Engineer'],
     projects: [],
     cvName: 'Mostafa_Nour_CV_Civil.pdf',
     createdAt: '2026-03-01T12:00:00Z',
@@ -296,22 +296,22 @@ const initialEngineers = [
 const initialClients = [
   {
     id: 'client-1',
-    fullName: 'م. طارق فاروق الباز',
+    fullName: 'Tarek El-Baz',
     email: 'tarek.baz@elrawda.com',
-    phone: '01011122233',
+    phone: '+20 101 112 2233',
     password: 'password123',
-    company: 'شركة الروضة للاستثمار العقاري والتطوير',
-    city: 'القاهرة',
+    company: 'El-Rawda Real Estate Development & Investment',
+    city: 'Cairo, Egypt',
     createdAt: '2025-01-05T10:00:00Z',
   },
   {
     id: 'client-2',
-    fullName: 'د. منى عبد السلام',
+    fullName: 'Dr. Mona Abdel-Salam',
     email: 'mona.salam@gmail.com',
-    phone: '01144455566',
+    phone: '+20 114 445 5566',
     password: 'password123',
-    company: 'مجموعة عيادات النخبة الطبية',
-    city: 'الإسكندرية',
+    company: 'Elite Specialized Medical Centers',
+    city: 'Alexandria, Egypt',
     createdAt: '2025-01-20T14:30:00Z',
   }
 ];
@@ -319,64 +319,64 @@ const initialClients = [
 const initialProjects = [
   {
     id: 'proj-1',
-    title: 'تصميم إنشائي كامل لفيلا سكنية دورين ورووف بالشيخ زايد',
-    description: 'مطلوب مهندس مدني إنشائي محترف لإعداد التصميم الإنشائي والنوتة الحسابية المعتمدة لفيلا مساحة الأرض 600 متر مربع ومساحة المبنى 320 متر مربع. تشمل المخرجات لوحات القواعد، الأعمدة، الأسقف، خزان المياه، والسور الخارجي بصيغتي DWG وPDF مع جدول حصر كميات الخرسانة وحديد التسليح.',
+    title: 'Full Structural & Seismic Design for Luxury Residential Villa in Sheikh Zayed',
+    description: 'Looking for a licensed senior structural engineer to prepare the complete structural design and calculation notes for a 600 sqm land plot (320 sqm built-up footprint, 2 stories + roof). Deliverables must include foundation layout, column schedules, slab reinforcement, water tank details, in both DWG and PDF formats, along with certified concrete and rebar quantity takeoff.',
     category: 'civil',
-    requiredSkills: ['تصميم إنشائي', 'ETABS', 'AutoCAD', 'حساب كميات', 'كود البناء المصري'],
-    budget: 15000,
-    duration: '10 أيام',
+    requiredSkills: ['Structural Design', 'ETABS', 'AutoCAD', 'Quantity Surveying', 'Building Codes'],
+    budget: 3500,
+    duration: '10 days',
     deadline: '2026-04-15',
     clientId: 'client-1',
-    clientName: 'م. طارق فاروق (شركة الروضة)',
-    clientCity: 'القاهرة',
+    clientName: 'Tarek El-Baz (El-Rawda Dev)',
+    clientCity: 'Cairo, Egypt',
     status: 'open',
     proposalsCount: 3,
     createdAt: '2026-03-01T10:00:00Z',
   },
   {
     id: 'proj-2',
-    title: 'تصميم داخلي ومعماري لمقر شركة تسويق رقمي 250م²',
-    description: 'نبحث عن مهندس ديكور أو معماري لتصميم مقر شركتنا الجديد بنظام Modern Industrial. يشمل العمل قاعة اجتماعات رئيسية، 4 غرف مدراء، مساحة عمل مفتوحة لـ 20 موظفاً، كافتيريا ومنطقة استراحة. مطلوب مخططات 3D واقعية ومخططات توزيع الإضاءة والتكييف وجدول الخامات.',
+    title: 'Interior Architectural Design for Creative Digital Agency Headquarters (250 sqm)',
+    description: 'We are seeking an experienced interior architect to design our new tech marketing office in a modern industrial aesthetic. Scope includes executive boardroom, 4 private cabins, open co-working space for 24 staff, breakout cafeteria, acoustic ceiling plans, and comprehensive FF&E material specifications.',
     category: 'interior',
-    requiredSkills: ['تصميم داخلي', '3ds Max', 'مخططات تنفيذية', 'اختيار خامات', 'توزيع إضاءة'],
-    budget: 22000,
-    duration: '14 يوماً',
+    requiredSkills: ['Interior Design', '3ds Max', 'Executive Layouts', 'Material Schedules', 'Lighting Design'],
+    budget: 4800,
+    duration: '14 days',
     deadline: '2026-04-20',
     clientId: 'client-2',
-    clientName: 'د. منى عبد السلام (مجموعة النخبة)',
-    clientCity: 'الإسكندرية',
+    clientName: 'Dr. Mona Abdel-Salam (Elite Group)',
+    clientCity: 'Alexandria, Egypt',
     status: 'open',
     proposalsCount: 4,
     createdAt: '2026-03-02T15:30:00Z',
   },
   {
     id: 'proj-3',
-    title: 'دراسة وتصميم شبكة تكييف مركزي HVAC ومكافحة حريق لمجمع طبي',
-    description: 'مطلوب إعداد مخططات أنظمة التكييف VRF ومجاري الهواء وشبكة رشاشات الحريق وكبائن الإطفاء ومضخات الحريق لمجمع طبي مكون من 3 طوابق طبقاً لاشتراطات الدفاع المدني وكود NFPA.',
+    title: 'HVAC Centralized VRF & NFPA Fire Fighting Engineering for Healthcare Facility',
+    description: 'Complete mechanical design for a 3-story specialized clinical hub. Deliverables encompass VRF cooling load calculation, duct layout, fire sprinkler networks, wet riser cabinets, and fire pump room sizing complying strictly with civil defense & NFPA standards.',
     category: 'mechanical',
-    requiredSkills: ['HVAC', 'Fire Fighting', 'HAP', 'NFPA', 'Revit MEP'],
-    budget: 35000,
-    duration: '21 يوماً',
+    requiredSkills: ['HVAC', 'Fire Fighting', 'HAP', 'NFPA Codes', 'Revit MEP'],
+    budget: 6500,
+    duration: '21 days',
     deadline: '2026-04-28',
     clientId: 'client-2',
-    clientName: 'د. منى عبد السلام (مجموعة النخبة)',
-    clientCity: 'الإسكندرية',
+    clientName: 'Dr. Mona Abdel-Salam (Elite Group)',
+    clientCity: 'Alexandria, Egypt',
     status: 'open',
     proposalsCount: 2,
     createdAt: '2026-03-03T09:00:00Z',
   },
   {
     id: 'proj-4',
-    title: 'تصميم محطة طاقة شمسية كهروضوئية 100 كيلوواط لمصنع بلاستيك',
-    description: 'مطلوب مهندس كهرباء متخصص لإعداد دراسة الجدوى وتصميم محطة طاقة شمسية سطحية On-Grid وربطها مع شبكة الكهرباء العامة واختيار أفضل الألواح والإنفرترات.',
+    title: '120kW Grid-Tied Solar Photovoltaic Plant Engineering & Interconnection',
+    description: 'Design and feasibility assessment for a rooftop solar PV facility on an industrial manufacturing plant. Scope includes solar radiation modeling, module string arrangement, inverter selection, and utility interconnection single-line diagram.',
     category: 'electrical',
-    requiredSkills: ['طاقة شمسية', 'PVSyst', 'AutoCAD Electrical', 'دراسة جدوى طاقة'],
-    budget: 18000,
-    duration: '12 يوماً',
+    requiredSkills: ['Solar PV', 'PVSyst', 'AutoCAD Electrical', 'Grid Interconnection'],
+    budget: 3200,
+    duration: '12 days',
     deadline: '2026-04-10',
     clientId: 'client-1',
-    clientName: 'م. طارق فاروق (شركة الروضة)',
-    clientCity: 'القاهرة',
+    clientName: 'Tarek El-Baz (El-Rawda Dev)',
+    clientCity: 'Cairo, Egypt',
     status: 'in_progress',
     proposalsCount: 3,
     createdAt: '2026-02-20T11:00:00Z',
@@ -388,13 +388,13 @@ const initialProposals = [
     id: 'prop-1',
     projectId: 'proj-1',
     engineerId: 'eng-1',
-    engineerName: 'م. أحمد كمال عبد العزيز',
+    engineerName: 'Eng. Ahmed Kamal, PE',
     engineerSpecialty: 'civil',
     engineerRating: 4.9,
     engineerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-    proposedBudget: 14000,
+    proposedBudget: 3200,
     deliveryDays: 8,
-    coverLetter: 'تحياتي بشمهندس طارق، اطلعت على متطلبات الفيلا بدقة. قمت بتصميم أكثر من 40 فيلا سكنية مماثلة بالشيخ زايد والتجمع. سأقوم بتسليم النوتة الحسابية المعتمدة ولوحات الـ DWG وجداول الحصر بدقة توفر في حديد التسليح.',
+    coverLetter: 'Greetings Mr. Tarek. I have thoroughly analyzed your villa design brief. I have engineered over 40 luxury villas in Sheikh Zayed and New Cairo. I will provide stamped calculation notes, full DWG sheets, and an optimized rebar schedule that significantly cuts concrete and steel costs.',
     status: 'pending',
     createdAt: '2026-03-01T14:00:00Z',
   },
@@ -402,13 +402,13 @@ const initialProposals = [
     id: 'prop-2',
     projectId: 'proj-2',
     engineerId: 'eng-4',
-    engineerName: 'م. مريم حسام الدين',
+    engineerName: 'Eng. Mariam Hossam',
     engineerSpecialty: 'interior',
     engineerRating: 4.9,
     engineerAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
-    proposedBudget: 21000,
+    proposedBudget: 4500,
     deliveryDays: 12,
-    coverLetter: 'أهلاً دكتورة منى. يسعدني العمل على مقر شركتكم. لدي خبرة واسعة في مساحات العمل الابتكارية بتصميم Industrial مريح يزيد من إنتاجية الموظفين. سأقدم لقطات واقعية 3D ومخططات تنفيذية دقيقة للمقاولين.',
+    coverLetter: 'Dear Dr. Mona, I would be delighted to design your agency headquarters. My studio specializes in modern biophilic workspaces that elevate productivity. I will deliver photorealistic 4K renders, contractor-ready lighting and ceiling plans, and full furniture sourcing schedules.',
     status: 'pending',
     createdAt: '2026-03-02T18:00:00Z',
   }
@@ -419,27 +419,27 @@ const initialReviews = [
     id: 'rev-1',
     engineerId: 'eng-1',
     clientId: 'client-1',
-    clientName: 'م. طارق فاروق',
+    clientName: 'Tarek El-Baz',
     rating: 5,
-    comment: 'مهندس قمة في الاحترافية والدقة في المواعيد. التصميم الإنشائي كان ممتازاً والنوتة الحسابية معتمدة دون أي تعديل من جهاز المدينة.',
+    comment: 'Exceptional structural engineer. Precision engineering, strictly on schedule, and calculation notes were approved without a single objection from the municipal board.',
     createdAt: '2025-12-10T12:00:00Z',
   },
   {
     id: 'rev-2',
     engineerId: 'eng-2',
     clientId: 'client-1',
-    clientName: 'م. طارق فاروق',
+    clientName: 'Tarek El-Baz',
     rating: 5,
-    comment: 'م. سارة أبدعت في تصميم واجهات مشروعنا السكني. الرندرات كانت فائقة الواقعية والعملاء انبهروا بالنتيجة.',
+    comment: 'Eng. Sarah created breathtaking contemporary facade designs for our project. The 4K visualizations mesmerized our investors.',
     createdAt: '2026-01-15T15:20:00Z',
   },
   {
     id: 'rev-3',
     engineerId: 'eng-3',
     clientId: 'client-2',
-    clientName: 'د. منى عبد السلام',
+    clientName: 'Dr. Mona Abdel-Salam',
     rating: 5,
-    comment: 'دراسة أنظمة التكييف كانت دقيقة جداً ووفرت علينا كثيراً في تكلفة المعدات. أنصح بالتعامل معه بشدة.',
+    comment: 'The HVAC and thermal modeling was extremely rigorous, saving us considerable capital expenditure on chiller equipment.',
     createdAt: '2026-02-05T09:10:00Z',
   }
 ];
@@ -448,16 +448,16 @@ const initialConversations = [
   {
     id: 'conv-1',
     clientId: 'client-1',
-    clientName: 'م. طارق فاروق',
+    clientName: 'Tarek El-Baz',
     engineerId: 'eng-1',
-    engineerName: 'م. أحمد كمال',
-    lastMessage: 'تمام بشمهندس، تم مراجعة تقرير التربة وسأبدأ بحسابات القواعد المسلحة.',
+    engineerName: 'Eng. Ahmed Kamal, PE',
+    lastMessage: 'Understood Eng. Tarek. Soil investigation report reviewed; proceeding with shallow foundation sizing.',
     lastMessageTime: '2026-03-02T16:45:00Z',
     unreadCount: 1,
     messages: [
-      { id: 'm1', senderId: 'client-1', text: 'السلام عليكم بشمهندس أحمد، أرسلت لك تقرير جسات التربة على الإيميل.', timestamp: '2026-03-02T16:30:00Z' },
-      { id: 'm2', senderId: 'eng-1', text: 'وعليكم السلام بشمهندس طارق، استلمته وجاري الفحص.', timestamp: '2026-03-02T16:35:00Z' },
-      { id: 'm3', senderId: 'eng-1', text: 'تمام بشمهندس، تم مراجعة تقرير التربة وسأبدأ بحسابات القواعد المسلحة.', timestamp: '2026-03-02T16:45:00Z' }
+      { id: 'm1', senderId: 'client-1', text: 'Hello Eng. Ahmed, I just emailed you the geotechnical soil borehole report.', timestamp: '2026-03-02T16:30:00Z' },
+      { id: 'm2', senderId: 'eng-1', text: 'Hello Eng. Tarek, received and currently running the bearing capacity checks.', timestamp: '2026-03-02T16:35:00Z' },
+      { id: 'm3', senderId: 'eng-1', text: 'Understood Eng. Tarek. Soil investigation report reviewed; proceeding with shallow foundation sizing.', timestamp: '2026-03-02T16:45:00Z' }
     ]
   }
 ];
@@ -466,8 +466,8 @@ const initialNotifications = [
   {
     id: 'notif-1',
     userId: 'client-1',
-    title: 'عرض جديد على مشروعك',
-    message: 'قدم م. أحمد كمال عرضاً لتنفيذ مشروع "التصميم الإنشائي للفيلا".',
+    title: 'New Proposal Received',
+    message: 'Eng. Ahmed Kamal submitted a proposal for "Full Structural & Seismic Design for Luxury Residential Villa".',
     type: 'proposal',
     read: false,
     createdAt: '2026-03-01T14:05:00Z',
@@ -475,8 +475,8 @@ const initialNotifications = [
   {
     id: 'notif-2',
     userId: 'eng-1',
-    title: 'تم اعتماد حسابك بنجاح',
-    message: 'تهانينا! قامت إدارة منصة مهندسPro باعتماد ملفك الشخصي كمهندس معتمد.',
+    title: 'Credentials Verified',
+    message: 'Congratulations! MahandesPro administrators have verified and accredited your consultant profile.',
     type: 'verification',
     read: true,
     createdAt: '2025-01-10T09:00:00Z',
@@ -497,7 +497,7 @@ const defaultData = {
     username: 'admin',
     password: 'admin123',
     role: 'admin',
-    name: 'مدير المنصة',
+    name: 'Platform Administrator',
   },
 };
 
@@ -509,7 +509,6 @@ function loadData() {
       return { ...defaultData };
     }
     const parsed = JSON.parse(raw);
-    // Ensure all critical arrays exist
     return {
       engineers: parsed.engineers?.length ? parsed.engineers : defaultData.engineers,
       clients: parsed.clients?.length ? parsed.clients : defaultData.clients,
@@ -556,7 +555,7 @@ export function registerEngineer(engineer) {
     (e) => e.email.toLowerCase() === engineer.email.toLowerCase() || e.phone === engineer.phone
   );
   if (exists) {
-    throw new Error('البريد الإلكتروني أو رقم الهاتف مسجل مسبقاً');
+    throw new Error('This email address or phone number is already registered.');
   }
   const newEngineer = {
     ...engineer,
@@ -575,8 +574,8 @@ export function registerEngineer(engineer) {
   data.notifications.push({
     id: generateId(),
     userId: 'admin',
-    title: 'طلب انضمام مهندس جديد',
-    message: `قدم ${newEngineer.fullName} طلب انضمام كمهندس جديد وهو بانتظار المراجعة.`,
+    title: 'New Engineer Application',
+    message: `${newEngineer.fullName} has applied for verified consultant credentials.`,
     type: 'verification',
     read: false,
     createdAt: new Date().toISOString(),
@@ -589,7 +588,7 @@ export function registerEngineer(engineer) {
 export function updateEngineerStatus(id, status, reason = '') {
   const data = loadData();
   const index = data.engineers.findIndex((e) => e.id === id);
-  if (index === -1) throw new Error('المهندس غير موجود');
+  if (index === -1) throw new Error('Engineer profile not found.');
   
   data.engineers[index].status = status;
   if (reason) data.engineers[index].statusReason = reason;
@@ -599,10 +598,10 @@ export function updateEngineerStatus(id, status, reason = '') {
   data.notifications.push({
     id: generateId(),
     userId: id,
-    title: status === 'approved' ? 'تهانينا! تم اعتماد حسابك' : 'تحديث بخصوص طلب التسجيل',
+    title: status === 'approved' ? 'Congratulations! Profile Approved' : 'Application Status Update',
     message: status === 'approved' 
-      ? 'تمت مراجعة ملفك الشخصي واعتماده بنجاح. يمكنك الآن استقبال طلبات المشاريع وعرض خدماتك.' 
-      : `للأسف لم يتم قبول الطلب: ${reason || 'يرجى مراجعة البيانات واستكمال السيرة الذاتية.'}`,
+      ? 'Your credentials have been verified and your consultant profile is now live.' 
+      : `Application not approved: ${reason || 'Please review your uploaded certifications and CV.'}`,
     type: 'verification',
     read: false,
     createdAt: new Date().toISOString(),
@@ -615,7 +614,7 @@ export function updateEngineerStatus(id, status, reason = '') {
 export function updateEngineer(id, updates) {
   const data = loadData();
   const index = data.engineers.findIndex((e) => e.id === id);
-  if (index === -1) throw new Error('المهندس غير موجود');
+  if (index === -1) throw new Error('Engineer not found.');
   data.engineers[index] = { ...data.engineers[index], ...updates };
   saveData(data);
   return data.engineers[index];
@@ -624,7 +623,7 @@ export function updateEngineer(id, updates) {
 export function addEngineerProject(engineerId, project) {
   const data = loadData();
   const index = data.engineers.findIndex((e) => e.id === engineerId);
-  if (index === -1) throw new Error('المهندس غير موجود');
+  if (index === -1) throw new Error('Engineer not found.');
   
   const projects = data.engineers[index].projects || [];
   const newProject = {
@@ -642,7 +641,7 @@ export function addEngineerProject(engineerId, project) {
 export function deleteEngineerProject(engineerId, projectId) {
   const data = loadData();
   const index = data.engineers.findIndex((e) => e.id === engineerId);
-  if (index === -1) throw new Error('المهندس غير موجود');
+  if (index === -1) throw new Error('Engineer not found.');
   
   data.engineers[index].projects = (data.engineers[index].projects || []).filter(
     (p) => p.id !== projectId && p.title !== projectId
@@ -660,7 +659,7 @@ export function registerClient(client) {
     (c) => c.email.toLowerCase() === client.email.toLowerCase() || c.phone === client.phone
   );
   if (exists) {
-    throw new Error('البريد الإلكتروني أو رقم الهاتف مسجل مسبقاً');
+    throw new Error('This email address or phone number is already registered.');
   }
   const newClient = {
     ...client,
@@ -677,7 +676,7 @@ export function loginClient(email, password) {
   const client = data.clients.find(
     (c) => c.email.toLowerCase() === email.toLowerCase() && c.password === password
   );
-  if (!client) throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+  if (!client) throw new Error('Invalid email or password.');
   return client;
 }
 
@@ -686,12 +685,12 @@ export function loginEngineer(email, password) {
   const engineer = data.engineers.find(
     (e) => e.email.toLowerCase() === email.toLowerCase() && e.password === password
   );
-  if (!engineer) throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+  if (!engineer) throw new Error('Invalid email or password.');
   if (engineer.status === 'pending') {
-    throw new Error('حسابك قيد المراجعة والتدقيق من قبل الإدارة الهندسية.');
+    throw new Error('Your account is currently under technical review by administration.');
   }
   if (engineer.status === 'rejected') {
-    throw new Error(engineer.statusReason ? `تم رفض الطلب: ${engineer.statusReason}` : 'تم رفض طلب التسجيل الخاص بك.');
+    throw new Error(engineer.statusReason ? `Application declined: ${engineer.statusReason}` : 'Your application was not approved.');
   }
   return engineer;
 }
@@ -701,7 +700,7 @@ export function loginAdmin(username, password) {
   if (data.admin.username === username && data.admin.password === password) {
     return { ...data.admin };
   }
-  throw new Error('اسم المستخدم أو كلمة المرور غير صحيحة');
+  throw new Error('Invalid admin credentials.');
 }
 
 // ====================== PROJECTS & PROPOSALS API ======================
@@ -723,7 +722,7 @@ export function getProjectById(id) {
   return data.projects?.find((p) => p.id === id) || null;
 }
 
-export function createProject(projectData, clientId, clientName, clientCity = 'مصر') {
+export function createProject(projectData, clientId, clientName, clientCity = 'Cairo, Egypt') {
   const data = loadData();
   const newProject = {
     ...projectData,
@@ -745,8 +744,8 @@ export function createProject(projectData, clientId, clientName, clientCity = '�
     data.notifications.push({
       id: generateId(),
       userId: eng.id,
-      title: 'مشروع جديد يناسب تخصصك!',
-      message: `تم نشر مشروع "${newProject.title}" بميزانية ${newProject.budget} ج.م في تخصصك.`,
+      title: 'New Matching Project Opportunity!',
+      message: `A new project "${newProject.title}" with a budget of $${newProject.budget} matches your specialty.`,
       type: 'proposal',
       read: false,
       createdAt: new Date().toISOString(),
@@ -760,7 +759,7 @@ export function createProject(projectData, clientId, clientName, clientCity = '�
 export function updateProjectStatus(projectId, status) {
   const data = loadData();
   const project = data.projects.find((p) => p.id === projectId);
-  if (!project) throw new Error('المشروع غير موجود');
+  if (!project) throw new Error('Project not found.');
   project.status = status;
   project.updatedAt = new Date().toISOString();
   saveData(data);
@@ -780,14 +779,14 @@ export function getProposalsForEngineer(engineerId) {
 export function submitProposal(proposalData) {
   const data = loadData();
   const project = data.projects.find((p) => p.id === proposalData.projectId);
-  if (!project) throw new Error('المشروع غير موجود');
+  if (!project) throw new Error('Project not found.');
 
   // Check if already applied
   const existing = (data.proposals || []).find(
     (p) => p.projectId === proposalData.projectId && p.engineerId === proposalData.engineerId
   );
   if (existing) {
-    throw new Error('لقد قمت بتقديم عرض على هذا المشروع مسبقاً.');
+    throw new Error('You have already submitted a proposal for this project.');
   }
 
   const newProposal = {
@@ -804,8 +803,8 @@ export function submitProposal(proposalData) {
   data.notifications.push({
     id: generateId(),
     userId: project.clientId,
-    title: 'عرض جديد على مشروعك',
-    message: `قدم المهندس ${proposalData.engineerName} عرضاً جديداً بقيمة ${proposalData.proposedBudget} ج.م على مشروعك "${project.title}".`,
+    title: 'New Proposal Received',
+    message: `${proposalData.engineerName} submitted a proposal ($${proposalData.proposedBudget}) for "${project.title}".`,
     type: 'proposal',
     read: false,
     createdAt: new Date().toISOString(),
@@ -818,7 +817,7 @@ export function submitProposal(proposalData) {
 export function updateProposalStatus(proposalId, status) {
   const data = loadData();
   const proposal = data.proposals.find((p) => p.id === proposalId);
-  if (!proposal) throw new Error('العرض غير موجود');
+  if (!proposal) throw new Error('Proposal not found.');
 
   proposal.status = status;
   proposal.updatedAt = new Date().toISOString();
@@ -834,10 +833,10 @@ export function updateProposalStatus(proposalId, status) {
   data.notifications.push({
     id: generateId(),
     userId: proposal.engineerId,
-    title: status === 'accepted' ? 'تهانينا! تم قبول عرضك' : 'تحديث بشأن عرضك',
+    title: status === 'accepted' ? 'Proposal Accepted!' : 'Proposal Update',
     message: status === 'accepted'
-      ? `قام العميل بقبول عرضك على مشروع "${project?.title}". يمكنك الآن بدء التنفيذ والتواصل معه.`
-      : `تم رفض عرضك على مشروع "${project?.title}". لا تقلق، هناك العديد من الفرص المتاحة.`,
+      ? `The client has accepted your proposal for "${project?.title}". You can now proceed and message the client.`
+      : `Your proposal for "${project?.title}" was not selected this time.`,
     type: 'status',
     read: false,
     createdAt: new Date().toISOString(),
@@ -851,7 +850,7 @@ export function updateProposalStatus(proposalId, status) {
 
 export function addReview(engineerId, clientId, rating, comment, projectTitle = '') {
   const data = loadData();
-  const client = data.clients.find((c) => c.id === clientId) || { fullName: 'عميل المنصة' };
+  const client = data.clients.find((c) => c.id === clientId) || { fullName: 'Verified Client' };
   
   const review = {
     id: generateId(),
@@ -877,8 +876,8 @@ export function addReview(engineerId, clientId, rating, comment, projectTitle = 
   data.notifications.push({
     id: generateId(),
     userId: engineerId,
-    title: 'تقييم جديد على ملفك الشخصي ⭐',
-    message: `حصلت على تقييم ${rating} من 5 من العميل ${client.fullName}.`,
+    title: 'New Client Review Received ⭐',
+    message: `You received a ${rating}/5 star review from ${client.fullName}.`,
     type: 'status',
     read: false,
     createdAt: new Date().toISOString(),
@@ -937,7 +936,7 @@ export function getMessages(conversationId) {
 export function sendMessage(conversationId, senderId, text) {
   const data = loadData();
   let conv = (data.conversations || []).find((c) => c.id === conversationId);
-  if (!conv) throw new Error('المحادثة غير موجودة');
+  if (!conv) throw new Error('Conversation not found.');
 
   const newMsg = {
     id: generateId(),
@@ -967,14 +966,14 @@ export function startOrGetConversation(clientId, clientName, engineerId, enginee
       clientName,
       engineerId,
       engineerName,
-      lastMessage: 'بدء المحادثة',
+      lastMessage: 'Conversation started',
       lastMessageTime: new Date().toISOString(),
       unreadCount: 0,
       messages: [
         {
           id: generateId(),
           senderId: clientId,
-          text: `مرحباً مهندس ${engineerName}، يسعدني التواصل معك بخصوص تفاصيل العمل.`,
+          text: `Hello Eng. ${engineerName}, I would like to discuss project requirements with you.`,
           timestamp: new Date().toISOString(),
         }
       ]
@@ -1038,25 +1037,25 @@ export function getPlatformStats() {
 export function getAdminAnalyticsData() {
   return {
     growthData: [
-      { month: 'أكتوبر', engineers: 12, clients: 18, projects: 10 },
-      { month: 'نوفمبر', engineers: 24, clients: 32, projects: 22 },
-      { month: 'ديسمبر', engineers: 38, clients: 50, projects: 35 },
-      { month: 'يناير', engineers: 55, clients: 72, projects: 48 },
-      { month: 'فبراير', engineers: 75, clients: 95, projects: 68 },
-      { month: 'مارس', engineers: 95, clients: 125, projects: 92 },
+      { month: 'Oct', engineers: 14, clients: 20, projects: 12 },
+      { month: 'Nov', engineers: 28, clients: 36, projects: 26 },
+      { month: 'Dec', engineers: 42, clients: 54, projects: 40 },
+      { month: 'Jan', engineers: 62, clients: 78, projects: 55 },
+      { month: 'Feb', engineers: 84, clients: 104, projects: 76 },
+      { month: 'Mar', engineers: 110, clients: 138, projects: 102 },
     ],
     categoryDistribution: [
-      { name: 'هندسة مدنية', value: 34, color: '#2563EB' },
-      { name: 'معمارية', value: 26, color: '#06B6D4' },
-      { name: 'ميكانيكا', value: 18, color: '#10B981' },
-      { name: 'كهرباء', value: 22, color: '#F59E0B' },
-      { name: 'تصميم داخلي', value: 16, color: '#8B5CF6' },
-      { name: 'برمجيات وIoT', value: 28, color: '#EC4899' },
+      { name: 'Civil & Structural', value: 34, color: '#2563EB' },
+      { name: 'Architecture', value: 26, color: '#06B6D4' },
+      { name: 'Mechanical & MEP', value: 18, color: '#0284C7' },
+      { name: 'Electrical & Power', value: 22, color: '#38BDF8' },
+      { name: 'Interior Design', value: 16, color: '#6366F1' },
+      { name: 'Software & IoT', value: 28, color: '#0EA5E9' },
     ]
   };
 }
 
-// ====================== AI FEATURES ENGINE ======================
+// ====================== AI FEATURES ENGINE (ENGLISH) ======================
 
 export function aiMatchEngineers(projectRequirements) {
   const data = loadData();
@@ -1066,40 +1065,40 @@ export function aiMatchEngineers(projectRequirements) {
   const targetText = `${title} ${description} ${category} ${requiredSkills.join(' ')}`.toLowerCase();
 
   const scored = approvedEngineers.map((engineer) => {
-    let score = 50; // base score
+    let score = 52;
     let reasons = [];
 
-    // Category match (+25)
+    // Category match
     if (engineer.specialty === category) {
-      score += 25;
-      reasons.push(`تخصص مطابق: ${SPECIALTY_LABELS[engineer.specialty]}`);
+      score += 26;
+      reasons.push(`Exact Specialty Alignment: ${SPECIALTY_LABELS[engineer.specialty]}`);
     }
 
-    // Skills match (+5 per matched skill)
+    // Skills match
     const matchedSkills = (engineer.skills || []).filter((s) =>
       targetText.includes(s.toLowerCase())
     );
     if (matchedSkills.length > 0) {
-      score += Math.min(20, matchedSkills.length * 5);
-      reasons.push(`يمتلك مهارات رئيسية: ${matchedSkills.slice(0, 3).join(', ')}`);
+      score += Math.min(18, matchedSkills.length * 6);
+      reasons.push(`Proven skills in: ${matchedSkills.slice(0, 3).join(', ')}`);
     }
 
-    // Experience bonus
-    if (engineer.experience >= 5) {
+    // Experience
+    if (engineer.experience >= 6) {
       score += 5;
-      reasons.push(`خبرة قوية (${engineer.experience} سنوات)`);
+      reasons.push(`Senior track record (${engineer.experience}+ years)`);
     }
 
-    // High rating bonus
+    // Top client satisfaction
     if (engineer.rating >= 4.8) {
       score += 5;
-      reasons.push(`تقييم ممتاز من العملاء (${engineer.rating} ⭐)`);
+      reasons.push(`Outstanding client rating (${engineer.rating} ⭐)`);
     }
 
     // Availability
     if (engineer.availability === 'available') {
-      score += 5;
-      reasons.push('متفرغ ومستعد للبدء فوراً');
+      score += 4;
+      reasons.push('Available immediately for project kickoff');
     }
 
     score = Math.min(99, score);
@@ -1115,47 +1114,44 @@ export function aiMatchEngineers(projectRequirements) {
 }
 
 export function aiEnhanceProjectDescription(roughTitle, roughDescription, category) {
-  // Simulates high-grade AI Project Assistant
-  const specialTemplates = {
+  const templates = {
     civil: {
-      suggestedTitle: `تصميم إنشائي متكامل ونوتة حسابية معتمدة لـ ${roughTitle || 'المشروع'}`,
-      refinedDescription: `المشروع يتطلب إعداد دراسة وتصميم إنشائي كامل وفق أحدث اشتراطات الكود الهندسي المعتمد.\n\nالمخرجات المتوقعة تشمل:\n1. نمذجة إنشائية ثلاثية الأبعاد على برامج ETABS / SAP2000.\n2. لوحات إنشائية تنفيذية تفصيلية (محاور، أعمدة، أسقف، أساسات).\n3. نوتة حسابية معتمدة جاهزة لتقديمها للجهات المختصة.\n4. جداول حصر كميات دقيقة للخرسانة وحديد التسليح لترشيد تكاليف التنفيذ.`,
-      recommendedSkills: ['تصميم إنشائي', 'ETABS', 'AutoCAD', 'حساب كميات', 'كود البناء'],
-      suggestedDuration: '10 إلى 14 يوماً'
+      suggestedTitle: `Comprehensive Structural Calculation Notes & Seismic BIM Modeling for ${roughTitle || 'Project'}`,
+      refinedDescription: `The project requires complete structural engineering analysis, design validation, and certified submittal documentation.\n\nKey Scope of Deliverables:\n1. 3D structural analysis models generated using ETABS and SAP2000.\n2. Executive structural construction drawings (Foundations, columns, slabs, and shear walls).\n3. Certified calculation notes ready for municipal authority approval.\n4. Detailed concrete and rebar quantity surveying (BOQ) with material cost optimization.`,
+      recommendedSkills: ['Structural Engineering', 'ETABS', 'AutoCAD', 'Quantity Surveying', 'Building Code Compliance'],
+      suggestedDuration: '10 to 14 days'
     },
     architecture: {
-      suggestedTitle: `تصميم معماري ومخططات واجهات ورخص بناء لـ ${roughTitle || 'المشروع'}`,
-      refinedDescription: `المشروع بحاجة إلى تصميم معماري مبتكر يجمع بين الجمالية الوظيفية واستغلال المساحات بأعلى كفاءة.\n\nالمخرجات المتوقعة:\n1. مخططات معمارية تنفيذية كاملة بمقياس رسم مناسب.\n2. تصميم واجهات معمارية خارجية مودرن مع لقطات 3D ورندرات واقعية 4K.\n3. مقترح توزيع الفراغات الداخلية والتهوية الطبيعية.\n4. جدول المواصفات والمواد الإنشائية المقترحة.`,
-      recommendedSkills: ['تصميم معماري', 'Revit Architecture', 'Lumion', '3ds Max', 'مخططات تنفيذية'],
-      suggestedDuration: '12 إلى 18 يوماً'
+      suggestedTitle: `Architectural Design, 4K Photorealistic Visualizations & Executive Plans for ${roughTitle || 'Project'}`,
+      refinedDescription: `Looking for innovative architectural design that optimizes functional spatial circulation while ensuring maximum aesthetic value.\n\nKey Scope of Deliverables:\n1. Full architectural concept plans and regulatory permit layouts.\n2. Contemporary exterior facade elevations with 4K day/dusk photorealistic renderings.\n3. Daylight studies, passive ventilation strategies, and zoning schemes.\n4. Comprehensive architectural specification schedule for construction tendering.`,
+      recommendedSkills: ['Architectural Design', 'Revit Architecture', 'Lumion', '3ds Max', 'Permit Documentation'],
+      suggestedDuration: '12 to 18 days'
     },
     interior: {
-      suggestedTitle: `تصميم داخلي وديكور فاخر مع لوحات تنفيذية لـ ${roughTitle || 'المشروع'}`,
-      refinedDescription: `المشروع يتضمن تصميماً داخلياً راقياً بأسلوب معاصر يتناسب مع هوية الفراغ.\n\nالمخرجات المتوقعة:\n1. لوحات Moodboards للمفاهيم اللونية وتناغم الخامات.\n2. لقطات منظور ثلاثي الأبعاد واقعية (3D Renderings) لكافة الزوايا.\n3. مخططات تنفيذية لأعمال الجبس، توزيع الإضاءة، والفرش.\n4. جدول تفصيلي بالأثاث ومواصفات الخامات وأكواد الدهانات.`,
-      recommendedSkills: ['تصميم داخلي', '3ds Max', 'Corona / V-Ray', 'مخططات إضاءة', 'Moodboards'],
-      suggestedDuration: '10 إلى 15 يوماً'
+      suggestedTitle: `Interior Spatial Architecture, Lighting Layouts & Executive Specs for ${roughTitle || 'Project'}`,
+      refinedDescription: `Seeking luxury interior design and spatial planning tailored to modern lifestyle and functional elegance.\n\nKey Scope of Deliverables:\n1. Cohesive concept moodboards with color palettes and tactile material samples.\n2. Ultra-photorealistic 3D interior renderings covering every functional angle.\n3. Detailed executive reflected ceiling plans (RCP), electrical, and custom joinery drawings.\n4. Comprehensive FF&E specification schedule with paint codes and vendor lists.`,
+      recommendedSkills: ['Interior Design', '3ds Max', 'Corona Renderer', 'Lighting Plans', 'FF&E Schedules'],
+      suggestedDuration: '10 to 15 days'
     }
   };
 
-  const template = specialTemplates[category] || {
-    suggestedTitle: roughTitle ? `مشروع هندسي متكامل: ${roughTitle}` : 'مشروع هندسي واستشاري متكامل',
-    refinedDescription: `المطلوب تنفيذ عمل هندسي احترافي بالمواصفات القياسية:\n\n${roughDescription || 'تنفيذ كافة المتطلبات الهندسية طبقاً للمخططات المعتمدة وتزويد العميل بكافة ملفات العمل القابلة للتعديل والتقارير الفنية.'}\n\nالمخرجات المتوقعة:\n1. ملفات العمل المصدرية والرسومات الهندسية المعتمدة.\n2. تقرير فني شامل بالمواصفات وجداول التنفيذ.\n3. دعم فني واستشارات أثناء مرحلة التنفيذ.`,
-    recommendedSkills: ['إشراف هندسي', 'AutoCAD', 'إدارة مشاريع', 'مواصفات قياسية'],
-    suggestedDuration: '14 يوماً'
+  return templates[category] || {
+    suggestedTitle: roughTitle ? `Integrated Engineering & Technical Consulting: ${roughTitle}` : 'Comprehensive Technical Engineering Consulting',
+    refinedDescription: `The assignment requires certified professional consulting adhering strictly to international standards.\n\n${roughDescription || 'Execute all engineering deliverables according to regulatory codes and furnish editable source files along with signed technical verification reports.'}\n\nDeliverables:\n1. Stamped engineering drawings and calculation notes.\n2. Detailed technical specifications and Bill of Quantities (BOQ).\n3. Technical supervision and contractor RFIs review support.`,
+    recommendedSkills: ['Engineering Consulting', 'AutoCAD', 'Project Management', 'Quality Assurance'],
+    suggestedDuration: '14 days'
   };
-
-  return template;
 }
 
 export function aiEnhanceProfile(currentBio, specialty, skills = []) {
-  const specLabel = SPECIALTY_LABELS[specialty] || 'مهندس محترف';
+  const specLabel = SPECIALTY_LABELS[specialty] || 'Certified Consultant';
   return {
-    enhancedBio: `أنا ${specLabel} معتمد، بخبرة عملية مثبتة في إدارة وتنفيذ المشاريع الهندسية بجودة قياسية ودقة متناهية. أحرص على تسليم مخرجات هندسية متكاملة طبقاً للأكواد المعمارية والإنشائية، مع تقديم حلول ابتكارية تخفض من التكاليف التشغيلية ومواد البناء بنسبة تصل إلى 15%. أسعى دائماً لتحقيق أعلى درجات الرضا لعملائي وتوفير متابعة دورية طوال فترة المشروع.`,
-    suggestedSkills: ['إدارة مشاريع هندسية', 'AutoCAD', 'Revit', 'حساب كميات', 'مواصفات الجودة', 'BIM'],
+    enhancedBio: `I am a licensed ${specLabel} with a proven track record delivering mission-critical engineering projects on time and under budget. I deliver robust, code-compliant blueprints and calculation notes using cutting-edge BIM software, ensuring precision and reducing material over-expenditure by up to 15%. Dedicated to clear communication and seamless milestone delivery.`,
+    suggestedSkills: ['Project Management', 'Revit', 'AutoCAD', 'Cost Estimation', 'BIM Coordination', 'Code Compliance'],
     profileTips: [
-      'أضف صوراً عالية الجودة ونماذج ثلاثية الأبعاد لمشاريعك في Portfolio.',
-      'اذكر الشهادات الهندسية وعضويات النقابة لرفع ثقة العملاء.',
-      'حدد سعراً تنافسياً للساعة وتأكد من تفعيل حالة التفرغ (Available).'
+      'Upload high-resolution 3D renders and detailed technical drawings to your portfolio.',
+      'List all professional licenses and engineering society affiliations to maximize client trust.',
+      'Set an hourly consulting rate and ensure your availability status is marked "Available for Hire".'
     ]
   };
 }

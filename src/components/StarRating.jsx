@@ -23,7 +23,7 @@ export default function StarRating({
   };
 
   return (
-    <div className="inline-flex items-center gap-1.5 dir-ltr select-none">
+    <div className="inline-flex items-center gap-1.5 select-none">
       <div className="flex items-center gap-0.5">
         {[1, 2, 3, 4, 5].map((star) => {
           const isFilled = star <= Math.round(rating);
@@ -43,7 +43,7 @@ export default function StarRating({
                   sizes[size],
                   isFilled
                     ? 'fill-amber-400 text-amber-400'
-                    : 'fill-slate-200 text-slate-300 dark:fill-slate-800 dark:text-slate-700'
+                    : 'fill-slate-100 text-slate-300 dark:fill-slate-800 dark:text-slate-700'
                 )}
               />
             </button>
@@ -51,8 +51,8 @@ export default function StarRating({
         })}
       </div>
       {showValue && (
-        <span className={clsx('font-semibold text-slate-700 dark:text-slate-300', textSizes[size])}>
-          {rating > 0 ? rating.toFixed(1) : 'جديد'}
+        <span className={clsx('font-bold text-slate-700 dark:text-slate-300', textSizes[size])}>
+          {rating > 0 ? rating.toFixed(1) : 'New'}
         </span>
       )}
     </div>

@@ -21,7 +21,8 @@ import {
   X,
   MessageSquare,
   Bookmark,
-  Calendar
+  Calendar,
+  Check
 } from 'lucide-react';
 import Layout from '../components/Layout';
 import StarRating from '../components/StarRating';
@@ -89,10 +90,10 @@ export default function EngineerProfile() {
     return (
       <Layout>
         <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white">المهندس غير موجود</h2>
-          <p className="text-xs text-slate-500 mt-1 mb-6">قد يكون الحساب غير معتمد بعد أو تم حذفه.</p>
-          <Link to="/engineers" className="px-5 py-2.5 rounded-xl bg-brand-blue text-white text-xs font-bold">
-            استكشف المهندسين
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Engineer Not Found</h2>
+          <p className="text-xs text-slate-500 mt-1 mb-6">This profile may be pending verification or has been removed.</p>
+          <Link to="/engineers" className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm">
+            Explore All Engineers
           </Link>
         </div>
       </Layout>
@@ -132,13 +133,13 @@ export default function EngineerProfile() {
 
     const alreadyReviewed = reviews.some((r) => r.clientId === user.id);
     if (alreadyReviewed) {
-      setReviewMsg({ type: 'error', text: 'لقد قمت بتقييم هذا المهندس مسبقاً.' });
+      setReviewMsg({ type: 'error', text: 'You have already submitted a review for this engineer.' });
       return;
     }
 
     addReview(id, user.id, rating, comment.trim());
     setComment('');
-    setReviewMsg({ type: 'success', text: 'شكراً لتقييمك! تم تحديث تقييم المهندس بنجاح.' });
+    setReviewMsg({ type: 'success', text: 'Thank you! Your rating and review have been published.' });
     loadData();
     setTimeout(() => setReviewMsg({ type: '', text: '' }), 4000);
   };
@@ -162,7 +163,7 @@ export default function EngineerProfile() {
   };
 
   const handleDeleteProject = (projId) => {
-    if (window.confirm('هل أنت متأكد من حذف هذا المشروع من معرض أعمالك؟')) {
+    if (window.confirm('Are you sure you want to remove this project from your portfolio?')) {
       deleteEngineerProject(engineer.id, projId);
       loadData();
     }
@@ -193,7 +194,7 @@ export default function EngineerProfile() {
 
   return (
     <Layout>
-      <div className="pb-16 text-right">
+      <div className="pb-16 text-left bg-slate-50/60 dark:bg-slate-950/40 min-h-screen">
         {/* Cover Image Banner */}
         <div className="relative h-48 sm:h-72 w-full bg-slate-800 overflow-hidden">
           <img
@@ -201,7 +202,7 @@ export default function EngineerProfile() {
             alt="Cover"
             className="w-full h-full object-cover opacity-80"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-transparent to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
         </div>
 
         {/* Profile Card Header Info */}
@@ -219,10 +220,10 @@ export default function EngineerProfile() {
                     />
                   </div>
                   <span
-                    className={`absolute bottom-2 left-2 w-4 h-4 rounded-full ring-2 ring-white dark:ring-slate-900 ${
+                    className={`absolute bottom-2 right-2 w-4 h-4 rounded-full ring-2 ring-white dark:ring-slate-900 ${
                       engineer.availability === 'available' ? 'bg-emerald-500' : 'bg-amber-500'
                     }`}
-                    title={engineer.availability === 'available' ? 'متاح للعمل' : 'مشغول حالياً'}
+                    title={engineer.availability === 'available' ? 'Available for new projects' : 'Currently busy'}
                   />
                 </div>
 
@@ -233,26 +234,26 @@ export default function EngineerProfile() {
                       {engineer.fullName}
                     </h1>
                     {engineer.status === 'approved' && (
-                      <CheckCircle2 className="w-5 h-5 text-brand-blue" title="مهندس معتمد من الإدارة" />
+                      <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-cyan-400" title="Officially Verified Consultant" />
                     )}
                   </div>
-                  <p className="text-sm font-semibold text-brand-blue dark:text-brand-cyan mt-1">
+                  <p className="text-sm font-semibold text-blue-600 dark:text-cyan-400 mt-1">
                     {SPECIALTY_LABELS[engineer.specialty] || engineer.specialty}
                   </p>
                   <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mt-2">
                     {engineer.location && (
                       <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5" />
+                        <MapPin className="w-3.5 h-3.5 text-slate-400" />
                         <span>{engineer.location}</span>
                       </span>
                     )}
                     <span className="flex items-center gap-1">
-                      <Briefcase className="w-3.5 h-3.5" />
-                      <span>{engineer.experience} سنوات خبرة</span>
+                      <Briefcase className="w-3.5 h-3.5 text-slate-400" />
+                      <span>{engineer.experience} Years Experience</span>
                     </span>
                     <div className="flex items-center gap-1">
                       <StarRating rating={engineer.rating} size="sm" />
-                      <span>({engineer.reviewCount || 0} تقييم)</span>
+                      <span>({engineer.reviewCount || 0} reviews)</span>
                     </div>
                   </div>
                 </div>
@@ -260,11 +261,11 @@ export default function EngineerProfile() {
 
               {/* Price & Action Buttons */}
               <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3">
-                <div className="text-right">
-                  <span className="text-xs text-slate-400">سعر الساعة الاستشارية</span>
+                <div className="text-left sm:text-right">
+                  <span className="text-xs text-slate-400 font-medium">Hourly Consultation Rate</span>
                   <div className="text-2xl font-black text-slate-900 dark:text-white">
-                    {engineer.hourlyRate}{' '}
-                    <span className="text-xs font-normal text-slate-500">ج.م/ساعة</span>
+                    ${engineer.hourlyRate}{' '}
+                    <span className="text-xs font-normal text-slate-500">/hr</span>
                   </div>
                 </div>
 
@@ -276,19 +277,19 @@ export default function EngineerProfile() {
                         onClick={handleToggleAvailability}
                         className={`px-3.5 py-2 rounded-xl text-xs font-bold transition ${
                           engineer.availability === 'available'
-                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            ? 'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/60'
+                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900/60'
                         }`}
                       >
-                        {engineer.availability === 'available' ? 'تحويل لـ مشغول' : 'تحويل لـ متاح'}
+                        {engineer.availability === 'available' ? 'Mark Busy' : 'Mark Available'}
                       </button>
                       <button
                         type="button"
                         onClick={handleOpenAiAssistant}
-                        className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-white text-xs font-bold shadow-sm flex items-center gap-1"
+                        className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs font-bold shadow-sm flex items-center gap-1 transition"
                       >
                         <Sparkles className="w-3.5 h-3.5" />
-                        <span>مساعد البروفايل AI</span>
+                        <span>AI Profile Architect</span>
                       </button>
                     </>
                   ) : (
@@ -298,20 +299,20 @@ export default function EngineerProfile() {
                         onClick={handleFavoriteClick}
                         className={`p-2.5 rounded-xl border transition ${
                           isFavorite
-                            ? 'bg-red-50 text-red-500 border-red-200'
+                            ? 'bg-red-50 text-red-500 border-red-200 dark:bg-red-950/40 dark:border-red-900'
                             : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700'
                         }`}
-                        title="حفظ في المفضلة"
+                        title="Save to bookmarks"
                       >
                         <Bookmark className={`w-4 h-4 ${isFavorite ? 'fill-red-500' : ''}`} />
                       </button>
                       <button
                         type="button"
                         onClick={handleStartChat}
-                        className="px-4 py-2.5 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white text-xs font-bold shadow-md shadow-brand-blue/20 flex items-center gap-1.5 transition"
+                        className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs font-bold shadow-md shadow-blue-500/20 flex items-center gap-1.5 transition hover:scale-[1.02]"
                       >
                         <MessageSquare className="w-4 h-4" />
-                        <span>تواصل الآن</span>
+                        <span>Contact & Hire</span>
                       </button>
                     </>
                   )}
@@ -321,21 +322,21 @@ export default function EngineerProfile() {
 
             {/* Profile Completion Indicator (Visible for owner) */}
             {isOwnProfile && completionPercent < 100 && (
-              <div className="mt-5 p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="mt-5 p-4 rounded-2xl bg-cyan-50/60 dark:bg-cyan-950/30 border border-cyan-100 dark:border-cyan-900/60 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div className="w-full sm:flex-1">
                   <div className="flex items-center justify-between text-xs font-bold mb-1.5 text-slate-800 dark:text-slate-200">
-                    <span>نسبة اكتمال ملفك الشخصي</span>
+                    <span>Profile Completion Score</span>
                     <span>{completionPercent}%</span>
                   </div>
                   <div className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-brand-blue rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full transition-all duration-500"
                       style={{ width: `${completionPercent}%` }}
                     />
                   </div>
                 </div>
-                <p className="text-xs text-brand-blue dark:text-brand-cyan font-semibold">
-                  أكمل إضافة مشاريعك وسيرتك لزيادة فرص ترشيحك بالمشاريع!
+                <p className="text-xs text-blue-700 dark:text-cyan-300 font-semibold">
+                  Complete your portfolio and credentials to rank higher in client search results!
                 </p>
               </div>
             )}
@@ -350,7 +351,7 @@ export default function EngineerProfile() {
               {/* Bio Section */}
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
-                  نبذة تعريفية وخبرات مهنية
+                  Professional Bio & Engineering Overview
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                   {engineer.bio}
@@ -360,13 +361,13 @@ export default function EngineerProfile() {
               {/* Skills Tags */}
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
-                  المهارات الهندسية والبرامج المستخدمة
+                  Engineering Competencies & Software Expertise
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {(engineer.skills || []).map((skill, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold"
+                      className="px-3 py-1.5 rounded-xl bg-blue-50/70 dark:bg-slate-800 text-blue-900 dark:text-blue-200 text-xs font-bold border border-blue-100 dark:border-slate-700"
                     >
                       {skill}
                     </span>
@@ -379,34 +380,34 @@ export default function EngineerProfile() {
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
                   <div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                      سابقة الأعمال والمشاريع المنفذة ({engineer.projects?.length || 0})
+                      Portfolio & Featured Deliverables ({engineer.projects?.length || 0})
                     </h3>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      مخططات وتصاميم هندسية سابقة معتمدة
+                      Verified blueprints, calculation sheets, and completed models
                     </p>
                   </div>
                   {isOwnProfile && (
                     <button
                       type="button"
                       onClick={() => setProjectModalOpen(true)}
-                      className="px-3.5 py-2 rounded-xl bg-brand-blue text-white text-xs font-bold flex items-center gap-1.5 shadow-sm hover:bg-brand-blueHover transition"
+                      className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
                     >
                       <PlusCircle className="w-4 h-4" />
-                      <span>إضافة مشروع جديد</span>
+                      <span>Add Project</span>
                     </button>
                   )}
                 </div>
 
                 {(engineer.projects || []).length === 0 ? (
                   <p className="text-xs text-slate-400 text-center py-8">
-                    لم تتم إضافة أي مشاريع في المعرض حتى الآن.
+                    No portfolio projects added yet.
                   </p>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {engineer.projects.map((proj, idx) => (
                       <div
                         key={proj.id || idx}
-                        className="p-5 rounded-2xl bg-brand-bg dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex flex-col justify-between"
+                        className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex flex-col justify-between"
                       >
                         <div>
                           <div className="flex items-center justify-between mb-2">
@@ -417,8 +418,8 @@ export default function EngineerProfile() {
                               <button
                                 type="button"
                                 onClick={() => handleDeleteProject(proj.id || proj.title)}
-                                className="text-slate-400 hover:text-red-500 p-1"
-                                title="حذف المشروع"
+                                className="text-slate-400 hover:text-red-500 p-1 transition"
+                                title="Delete project"
                               >
                                 <Trash2 className="w-4 h-4" />
                               </button>
@@ -433,7 +434,7 @@ export default function EngineerProfile() {
                               {proj.skills.map((s, i) => (
                                 <span
                                   key={i}
-                                  className="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-medium"
+                                  className="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-medium border border-slate-200/60 dark:border-slate-600"
                                 >
                                   {s}
                                 </span>
@@ -447,9 +448,9 @@ export default function EngineerProfile() {
                             href={proj.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs text-brand-blue dark:text-brand-cyan font-bold flex items-center gap-1 hover:underline self-start pt-2 border-t border-slate-200/60 dark:border-slate-700 w-full"
+                            className="text-xs text-blue-600 dark:text-cyan-400 font-bold flex items-center gap-1 hover:underline self-start pt-2 border-t border-slate-200/60 dark:border-slate-700 w-full"
                           >
-                            <span>عرض تفاصيل المشروع</span>
+                            <span>View External Project</span>
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
                         )}
@@ -463,31 +464,31 @@ export default function EngineerProfile() {
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                    تقييمات وآراء العملاء ({reviews.length})
+                    Client Reviews & Testimonials ({reviews.length})
                   </h3>
                   <div className="flex items-center gap-1 text-sm font-bold text-slate-900 dark:text-white">
                     <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    <span>{engineer.rating} من 5.0</span>
+                    <span>{engineer.rating} out of 5.0</span>
                   </div>
                 </div>
 
                 {reviews.length === 0 ? (
                   <p className="text-xs text-slate-400 text-center py-6">
-                    لا توجد تقييمات مكتوبة حتى الآن.
+                    No client reviews submitted yet.
                   </p>
                 ) : (
                   <div className="space-y-4 mb-8">
                     {reviews.map((rev) => (
                       <div
                         key={rev.id}
-                        className="p-4 rounded-xl bg-brand-bg dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60"
+                        className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60"
                       >
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-xs font-bold text-slate-900 dark:text-white">
-                            {rev.clientName || 'عميل معتمد'}
+                            {rev.clientName || 'Verified Client'}
                           </span>
                           <span className="text-[10px] text-slate-400">
-                            {new Date(rev.createdAt).toLocaleDateString('ar-EG', {
+                            {new Date(rev.createdAt).toLocaleDateString('en-US', {
                               year: 'numeric',
                               month: 'short',
                               day: 'numeric',
@@ -509,15 +510,15 @@ export default function EngineerProfile() {
                 {isClient && (
                   <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-2">
-                      أضف تقييمك وتجربتك مع هذا المهندس
+                      Leave a Verified Review
                     </h4>
 
                     {reviewMsg.text && (
                       <div
                         className={`p-3 rounded-xl text-xs font-bold mb-4 ${
                           reviewMsg.type === 'success'
-                            ? 'bg-emerald-50 text-emerald-800'
-                            : 'bg-red-50 text-red-800'
+                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300'
+                            : 'bg-red-50 text-red-800 border border-red-200 dark:bg-red-950/40 dark:text-red-300'
                         }`}
                       >
                         {reviewMsg.text}
@@ -527,7 +528,7 @@ export default function EngineerProfile() {
                     <form onSubmit={handleReviewSubmit} className="space-y-3">
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                          التقييم بالنجوم:
+                          Star Rating:
                         </label>
                         <StarRating rating={rating} size="lg" interactive onChange={setRating} />
                       </div>
@@ -536,15 +537,15 @@ export default function EngineerProfile() {
                         rows={3}
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
-                        placeholder="اكتب تعليقك حول دقة المواعيد وجودة المخططات والتواصل..."
-                        className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                        placeholder="Share your experience regarding punctuality, technical precision, CAD compliance, and communication..."
+                        className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                       />
 
                       <button
                         type="submit"
-                        className="px-5 py-2.5 rounded-xl bg-brand-blue text-white text-xs font-bold hover:bg-brand-blueHover transition shadow-sm"
+                        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs font-bold transition shadow-sm"
                       >
-                        إرسال التقييم
+                        Submit Review
                       </button>
                     </form>
                   </div>
@@ -557,24 +558,24 @@ export default function EngineerProfile() {
               {/* Contact Card */}
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-card">
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-4">
-                  بيانات التواصل والاعتمادات
+                  Contact Information & Credentials
                 </h4>
 
                 <div className="space-y-3 text-xs">
-                  <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                    <Phone className="w-4 h-4 text-brand-blue shrink-0" />
+                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                    <Phone className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" />
                     <div>
-                      <span className="text-[10px] text-slate-400 block">رقم الهاتف</span>
-                      <a href={`tel:${engineer.phone}`} className="font-bold text-slate-800 dark:text-slate-200 hover:underline" dir="ltr">
+                      <span className="text-[10px] text-slate-400 block font-medium">Phone Number</span>
+                      <a href={`tel:${engineer.phone}`} className="font-bold text-slate-800 dark:text-slate-200 hover:underline">
                         {engineer.phone}
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                    <Mail className="w-4 h-4 text-brand-blue shrink-0" />
+                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                    <Mail className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" />
                     <div className="overflow-hidden">
-                      <span className="text-[10px] text-slate-400 block">البريد الإلكتروني</span>
+                      <span className="text-[10px] text-slate-400 block font-medium">Email Address</span>
                       <a href={`mailto:${engineer.email}`} className="font-bold text-slate-800 dark:text-slate-200 hover:underline truncate block">
                         {engineer.email}
                       </a>
@@ -582,24 +583,24 @@ export default function EngineerProfile() {
                   </div>
 
                   {engineer.linkedin && (
-                    <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                    <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
                       <Globe className="w-4 h-4 text-blue-600 shrink-0" />
                       <div className="overflow-hidden">
-                        <span className="text-[10px] text-slate-400 block">حساب LinkedIn</span>
+                        <span className="text-[10px] text-slate-400 block font-medium">LinkedIn Profile</span>
                         <a href={engineer.linkedin} target="_blank" rel="noopener noreferrer" className="font-bold text-slate-800 dark:text-slate-200 hover:underline truncate block">
-                          الملف الشخصي
+                          linkedin.com/in/{engineer.fullName.toLowerCase().replace(/\s+/g, '')}
                         </a>
                       </div>
                     </div>
                   )}
 
                   {engineer.github && (
-                    <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                    <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
                       <Code2 className="w-4 h-4 text-slate-800 dark:text-white shrink-0" />
                       <div className="overflow-hidden">
-                        <span className="text-[10px] text-slate-400 block">حساب GitHub / الأعمال</span>
+                        <span className="text-[10px] text-slate-400 block font-medium">Technical Portfolio</span>
                         <a href={engineer.github} target="_blank" rel="noopener noreferrer" className="font-bold text-slate-800 dark:text-slate-200 hover:underline truncate block">
-                          مستودعات الكود
+                          github.com/{engineer.fullName.toLowerCase().replace(/\s+/g, '')}
                         </a>
                       </div>
                     </div>
@@ -617,13 +618,13 @@ export default function EngineerProfile() {
                         link.download = engineer.cvName || `${engineer.fullName}_CV.pdf`;
                         link.click();
                       } else {
-                        alert('السيرة الذاتية متاحة للاطلاع عبر التواصل المباشر.');
+                        alert('Consultant CV is available upon direct client request.');
                       }
                     }}
                     className="w-full py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-bold text-slate-800 dark:text-white flex items-center justify-center gap-2 transition"
                   >
-                    <Download className="w-4 h-4 text-brand-blue" />
-                    <span>تحميل السيرة الذاتية (CV)</span>
+                    <Download className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
+                    <span>Download Engineering Resume (CV)</span>
                   </button>
                 </div>
               </div>
@@ -631,16 +632,16 @@ export default function EngineerProfile() {
               {/* Certifications Card */}
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 shadow-card">
                 <div className="flex items-center gap-2 mb-3">
-                  <Award className="w-4 h-4 text-brand-cyan" />
+                  <Award className="w-4 h-4 text-cyan-500" />
                   <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                    الشهادات والاعتمادات المهنية
+                    Accreditations & Licenses
                   </h4>
                 </div>
 
                 <div className="space-y-2 text-xs">
                   {(engineer.certifications || [
-                    'عضو نقابة المهندسين المصرية',
-                    'شهادة مزاولة مهنة استشارية'
+                    'National Engineers Syndicate Member',
+                    'Certified Professional Engineering License'
                   ]).map((cert, idx) => (
                     <div
                       key={idx}
@@ -661,12 +662,12 @@ export default function EngineerProfile() {
       {projectModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setProjectModalOpen(false)} />
-          <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 text-right animate-in fade-in duration-150">
+          <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 text-left animate-in fade-in duration-150 border border-slate-200 dark:border-slate-800">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                إضافة مشروع لمعرض أعمالك
+                Add Project to Portfolio
               </h3>
-              <button type="button" onClick={() => setProjectModalOpen(false)} className="p-1 rounded-lg text-slate-400">
+              <button type="button" onClick={() => setProjectModalOpen(false)} className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white transition">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -674,71 +675,71 @@ export default function EngineerProfile() {
             <form onSubmit={handleAddProject} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  اسم المشروع *
+                  Project Title *
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="مثال: تصميم إنشائي لبرج سكني 14 طابقاً"
+                  placeholder="e.g. Structural Design of 14-Story High-Rise Tower"
                   value={newProject.title}
                   onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  وصف المشروع والمخرجات *
+                  Description & Deliverables *
                 </label>
                 <textarea
                   required
                   rows={4}
-                  placeholder="وضح دورك في المشروع، النوت الحسابية، البرامج المستخدمة والنتائج المحققة..."
+                  placeholder="Detail your exact engineering contribution, calculation sheets, software used, and deliverables..."
                   value={newProject.description}
                   onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  المهارات / البرامج (مفصولة بفاصلة)
+                  Skills & Tools Used (comma-separated)
                 </label>
                 <input
                   type="text"
-                  placeholder="مثال: ETABS, SAFE, Revit, حساب كميات"
+                  placeholder="e.g. ETABS, SAFE, Revit, Bill of Quantities"
                   value={newProject.skills}
                   onChange={(e) => setNewProject({ ...newProject, skills: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  رابط المشروع أو ملف العرض (اختياري)
+                  Project URL or Portfolio Link (optional)
                 </label>
                 <input
                   type="url"
                   placeholder="https://..."
                   value={newProject.link}
                   onChange={(e) => setNewProject({ ...newProject, link: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               <div className="pt-4 flex items-center gap-3">
                 <button
                   type="submit"
-                  className="flex-1 py-3 rounded-xl bg-brand-blue text-white text-xs font-bold shadow-md hover:bg-brand-blueHover transition"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs font-bold shadow-md transition"
                 >
-                  حفظ المشروع
+                  Save Project
                 </button>
                 <button
                   type="button"
                   onClick={() => setProjectModalOpen(false)}
-                  className="px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-300"
+                  className="px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
                 >
-                  إلغاء
+                  Cancel
                 </button>
               </div>
             </form>
@@ -750,15 +751,15 @@ export default function EngineerProfile() {
       {aiTipsOpen && aiTips && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setAiTipsOpen(false)} />
-          <div className="relative w-full max-w-xl bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 text-right animate-in fade-in duration-150">
+          <div className="relative w-full max-w-xl bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 text-left animate-in fade-in duration-150 border border-slate-200 dark:border-slate-800">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-brand-cyan" />
+                <Sparkles className="w-5 h-5 text-cyan-500" />
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  مساعد تحسين الملف الشخصي الذكي AI
+                  AI Profile Optimization Assistant
                 </h3>
               </div>
-              <button type="button" onClick={() => setAiTipsOpen(false)} className="p-1 rounded-lg text-slate-400">
+              <button type="button" onClick={() => setAiTipsOpen(false)} className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white transition">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -766,7 +767,7 @@ export default function EngineerProfile() {
             <div className="space-y-4">
               <div>
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
-                  مقترح تحسين النبذة التعريفية (Bio):
+                  AI-Optimized Professional Bio:
                 </span>
                 <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-200 leading-relaxed border border-slate-200 dark:border-slate-700">
                   {aiTips.enhancedBio}
@@ -774,15 +775,16 @@ export default function EngineerProfile() {
                 <button
                   type="button"
                   onClick={handleApplyAiBio}
-                  className="mt-2 text-xs font-bold text-brand-blue dark:text-brand-cyan hover:underline"
+                  className="mt-2 text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
                 >
-                  ✓ تطبيق هذه النبذة في ملفي الشخصي
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Apply this bio to my profile</span>
                 </button>
               </div>
 
               <div>
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-2">
-                  نصائح ذهبية لزيادة معدل قبول عروضك:
+                  Actionable Tips to Maximize Proposal Acceptance:
                 </span>
                 <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
                   {aiTips.profileTips.map((tip, i) => (

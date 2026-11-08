@@ -19,11 +19,11 @@ export const Input = forwardRef(function Input(
   const inputId = id || props.name || Math.random().toString(36).slice(2, 8);
 
   return (
-    <div className="w-full text-right">
+    <div className="w-full text-left">
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1.5"
+          className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
         >
           {label}
         </label>
@@ -33,7 +33,7 @@ export const Input = forwardRef(function Input(
           <div
             className={clsx(
               'absolute inset-y-0 flex items-center pointer-events-none text-slate-400 dark:text-slate-500',
-              iconPosition === 'start' ? 'right-3' : 'left-3'
+              iconPosition === 'start' ? 'left-3.5' : 'right-3.5'
             )}
           >
             <Icon className="w-4 h-4" />
@@ -46,14 +46,14 @@ export const Input = forwardRef(function Input(
           className={twMerge(
             clsx(
               'w-full bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500',
-              'border rounded-xl text-sm transition-all duration-200 outline-none',
-              'focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue',
+              'border rounded-xl text-sm transition-all duration-200 outline-none shadow-sm',
+              'focus:ring-2 focus:ring-cyan-500/30 focus:border-brand-blue dark:focus:border-cyan-400',
               error
                 ? 'border-red-500 focus:ring-red-400/30 focus:border-red-500'
-                : 'border-slate-300 dark:border-slate-700/80',
+                : 'border-slate-200 dark:border-slate-700/80',
               disabled && 'opacity-60 cursor-not-allowed bg-slate-100 dark:bg-slate-800',
-              Icon && iconPosition === 'start' ? 'pr-10 pl-3 py-2.5' : '',
-              Icon && iconPosition === 'end' ? 'pl-10 pr-3 py-2.5' : '',
+              Icon && iconPosition === 'start' ? 'pl-10 pr-3.5 py-2.5' : '',
+              Icon && iconPosition === 'end' ? 'pr-10 pl-3.5 py-2.5' : '',
               !Icon ? 'px-3.5 py-2.5' : '',
               className
             )
@@ -89,11 +89,11 @@ export const Textarea = forwardRef(function Textarea(
   const inputId = id || props.name || Math.random().toString(36).slice(2, 8);
 
   return (
-    <div className="w-full text-right">
+    <div className="w-full text-left">
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1.5"
+          className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
         >
           {label}
         </label>
@@ -106,11 +106,11 @@ export const Textarea = forwardRef(function Textarea(
         className={twMerge(
           clsx(
             'w-full bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500',
-            'border rounded-xl px-3.5 py-2.5 text-sm transition-all duration-200 outline-none resize-y',
-            'focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue',
+            'border rounded-xl px-3.5 py-2.5 text-sm transition-all duration-200 outline-none resize-y shadow-sm',
+            'focus:ring-2 focus:ring-cyan-500/30 focus:border-brand-blue dark:focus:border-cyan-400',
             error
               ? 'border-red-500 focus:ring-red-400/30 focus:border-red-500'
-              : 'border-slate-300 dark:border-slate-700/80',
+              : 'border-slate-200 dark:border-slate-700/80',
             disabled && 'opacity-60 cursor-not-allowed bg-slate-100 dark:bg-slate-800',
             className
           )
@@ -133,7 +133,7 @@ export const Select = forwardRef(function Select(
     error,
     helperText,
     options = [],
-    placeholder = 'اختر...',
+    placeholder = 'Select...',
     className,
     id,
     disabled = false,
@@ -145,11 +145,11 @@ export const Select = forwardRef(function Select(
   const inputId = id || props.name || Math.random().toString(36).slice(2, 8);
 
   return (
-    <div className="w-full text-right">
+    <div className="w-full text-left">
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1.5"
+          className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
         >
           {label}
         </label>
@@ -161,11 +161,11 @@ export const Select = forwardRef(function Select(
         className={twMerge(
           clsx(
             'w-full bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100',
-            'border rounded-xl px-3.5 py-2.5 text-sm transition-all duration-200 outline-none',
-            'focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue',
+            'border rounded-xl px-3.5 py-2.5 text-sm transition-all duration-200 outline-none shadow-sm',
+            'focus:ring-2 focus:ring-cyan-500/30 focus:border-brand-blue dark:focus:border-cyan-400',
             error
               ? 'border-red-500 focus:ring-red-400/30 focus:border-red-500'
-              : 'border-slate-300 dark:border-slate-700/80',
+              : 'border-slate-200 dark:border-slate-700/80',
             disabled && 'opacity-60 cursor-not-allowed bg-slate-100 dark:bg-slate-800',
             className
           )

@@ -32,7 +32,7 @@ export default function EngineerRegister() {
     skills: '',
     linkedin: '',
     github: '',
-    location: 'القاهرة، مصر',
+    location: 'Chicago, IL',
     cv: null,
     cvName: '',
   });
@@ -63,7 +63,7 @@ export default function EngineerRegister() {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        setError('حجم ملف السيرة الذاتية يجب أن لا يتجاوز 5 ميجابايت');
+        setError('Resume file size must not exceed 5MB.');
         return;
       }
       updateField('cv', file);
@@ -72,26 +72,26 @@ export default function EngineerRegister() {
   };
 
   const validate = () => {
-    if (!form.fullName.trim()) return 'الاسم الكامل مطلوب';
-    if (!form.phone.trim()) return 'رقم الهاتف مطلوب';
-    if (!/^01[0-9]{9}$/.test(form.phone.replace(/\s/g, ''))) {
-      return 'رقم الهاتف غير صحيح (مثال: 01012345678)';
+    if (!form.fullName.trim()) return 'Full name is required.';
+    if (!form.phone.trim()) return 'Phone number is required.';
+    if (form.phone.replace(/[^0-9]/g, '').length < 7) {
+      return 'Please enter a valid phone number (at least 7 digits).';
     }
-    if (!form.email.trim()) return 'البريد الإلكتروني مطلوب';
+    if (!form.email.trim()) return 'Email address is required.';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      return 'البريد الإلكتروني غير صحيح';
+      return 'Please enter a valid email address.';
     }
-    if (!form.password) return 'كلمة المرور مطلوبة';
-    if (form.password.length < 6) return 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
-    if (form.password !== form.confirmPassword) return 'كلمتا المرور غير متطابقتين';
-    if (!form.specialty) return 'التخصص الهندسي مطلوب';
-    if (!form.hourlyRate || Number(form.hourlyRate) <= 0) return 'سعر الساعة الاستشارية مطلوب';
-    if (!form.experience || Number(form.experience) < 0) return 'سنوات الخبرة مطلوبة';
-    if (!form.bio.trim() || form.bio.trim().length < 40) {
-      return 'النبذة التعريفية مطلوبة (40 حرفاً على الأقل للتعريف بخبراتك)';
+    if (!form.password) return 'Password is required.';
+    if (form.password.length < 6) return 'Password must be at least 6 characters.';
+    if (form.password !== form.confirmPassword) return 'Passwords do not match.';
+    if (!form.specialty) return 'Engineering specialty is required.';
+    if (!form.hourlyRate || Number(form.hourlyRate) <= 0) return 'Hourly consultation rate is required.';
+    if (!form.experience || Number(form.experience) < 0) return 'Years of experience is required.';
+    if (!form.bio.trim() || form.bio.trim().length < 30) {
+      return 'Professional bio is required (at least 30 characters).';
     }
-    if (!form.skills.trim()) return 'المهارات والبرامج الهندسية مطلوبة';
-    if (!form.cv && !form.cvName) return 'يرجى إرفاق السيرة الذاتية (CV)';
+    if (!form.skills.trim()) return 'Engineering skills and software expertise are required.';
+    if (!form.cv && !form.cvName) return 'Please attach your engineering resume or portfolio (CV).';
 
     return null;
   };
@@ -147,24 +147,24 @@ export default function EngineerRegister() {
 
   return (
     <Layout>
-      <div className="py-12 sm:py-20 flex items-center justify-center text-right">
+      <div className="py-12 sm:py-20 flex items-center justify-center text-left bg-slate-50/60 dark:bg-slate-950/40 min-h-[calc(100vh-140px)]">
         <div className="w-full max-w-3xl px-4">
           <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-10 shadow-card">
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-cyan text-white flex items-center justify-center mx-auto mb-3 shadow-glow">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center mx-auto mb-3 shadow-md shadow-blue-500/20">
                 <Compass className="w-6 h-6" />
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-                طلب انضمام كمهندس استشاري
+                Apply as Engineering Consultant
               </h1>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                سجل بياناتك ومؤهلاتك لاعتماد حسابك من الإدارة الهندسية والبدء باستقبال المشاريع
+                Submit credentials and portfolio for verified accreditation and access to project tenders
               </p>
             </div>
 
             {error && (
-              <div className="p-4 rounded-xl bg-red-50 text-red-700 text-xs font-bold mb-6 flex items-center gap-2 border border-red-200">
+              <div className="p-4 rounded-xl bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-300 text-xs font-bold mb-6 flex items-center gap-2 border border-red-200 dark:border-red-900">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -174,35 +174,35 @@ export default function EngineerRegister() {
               {/* Personal & Account Info */}
               <div>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white pb-2 border-b border-slate-100 dark:border-slate-800 mb-4">
-                  1. البيانات الشخصية والحساب
+                  1. Identity & Credentials
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      الاسم الكامل (كما بالبطاقة/النقابة) *
+                      Full Legal Name (as on professional license) *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="م. أحمد كمال عبد العزيز"
+                      placeholder="e.g. Eng. Marcus Vance, P.E."
                       value={form.fullName}
                       onChange={(e) => updateField('fullName', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      رقم الهاتف (واتساب متاح) *
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
                       required
-                      placeholder="01012345678"
+                      placeholder="+1 (555) 789-0123"
                       value={form.phone}
                       onChange={(e) => updateField('phone', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
@@ -210,21 +210,21 @@ export default function EngineerRegister() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      البريد الإلكتروني *
+                      Email Address *
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="eng.ahmed@example.com"
+                      placeholder="marcus@structuralpro.io"
                       value={form.email}
                       onChange={(e) => updateField('email', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      كلمة المرور *
+                      Password *
                     </label>
                     <input
                       type="password"
@@ -232,13 +232,13 @@ export default function EngineerRegister() {
                       placeholder="••••••••"
                       value={form.password}
                       onChange={(e) => updateField('password', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      تأكيد كلمة المرور *
+                      Confirm Password *
                     </label>
                     <input
                       type="password"
@@ -246,7 +246,7 @@ export default function EngineerRegister() {
                       placeholder="••••••••"
                       value={form.confirmPassword}
                       onChange={(e) => updateField('confirmPassword', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
@@ -255,18 +255,18 @@ export default function EngineerRegister() {
               {/* Engineering Professional Info */}
               <div>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white pb-2 border-b border-slate-100 dark:border-slate-800 mb-4">
-                  2. التخصص والخبرات المهنية
+                  2. Discipline & Professional Competencies
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      التخصص الهندسي الرئيسي *
+                      Primary Engineering Discipline *
                     </label>
                     <select
                       value={form.specialty}
                       onChange={(e) => updateField('specialty', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue cursor-pointer font-medium"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer font-medium"
                     >
                       {ENGINEERING_CATEGORIES.map((c) => (
                         <option key={c.id} value={c.id}>
@@ -278,67 +278,67 @@ export default function EngineerRegister() {
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      سعر الساعة الاستشارية (ج.م) *
+                      Hourly Consultation Rate ($ USD) *
                     </label>
                     <input
                       type="number"
                       required
-                      placeholder="مثال: 350"
+                      placeholder="e.g. 85"
                       value={form.hourlyRate}
                       onChange={(e) => updateField('hourlyRate', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      سنوات الخبرة العملية *
+                      Years of Experience *
                     </label>
                     <input
                       type="number"
                       required
-                      placeholder="مثال: 6"
+                      placeholder="e.g. 8"
                       value={form.experience}
                       onChange={(e) => updateField('experience', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
 
                 <div className="mb-4">
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    المهارات والبرامج الهندسية (مفصولة بفواصل) *
+                    Skills & Engineering Software (comma-separated) *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="مثال: ETABS, SAP2000, AutoCAD, Revit Structure, حساب كميات"
+                    placeholder="e.g. ETABS, SAP2000, AutoCAD, Revit Structure, Bill of Quantities"
                     value={form.skills}
                     onChange={(e) => updateField('skills', e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="mb-4">
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    النبذة المهنية وخبرات المشاريع *
+                    Professional Bio & Track Record *
                   </label>
                   <textarea
                     required
                     rows={4}
-                    placeholder="تحدث عن كلياتك وتدريبك، المشاريع الكبرى التي أشرفت على تصميمها أو تنفيذها، واشتراطات الجودة التي تلتزم بها..."
+                    placeholder="Summarize your university degree, accredited licenses, major landmark projects supervised, and quality standards you adhere to..."
                     value={form.bio}
                     onChange={(e) => updateField('bio', e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-brand-blue"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
                 {/* CV File Upload */}
                 <div className="p-4 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/40 text-center">
-                  <Upload className="w-8 h-8 text-brand-blue mx-auto mb-2" />
+                  <Upload className="w-8 h-8 text-blue-600 dark:text-cyan-400 mx-auto mb-2" />
                   <label className="cursor-pointer block">
-                    <span className="text-xs font-bold text-brand-blue dark:text-brand-cyan hover:underline">
-                      اضغط هنا لرفع السيرة الذاتية (PDF أو DOCX)
+                    <span className="text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline">
+                      Click to upload Resume / CV (PDF or DOCX)
                     </span>
                     <input
                       type="file"
@@ -348,7 +348,7 @@ export default function EngineerRegister() {
                     />
                   </label>
                   <span className="text-[11px] text-slate-400 mt-1 block">
-                    {form.cvName ? `الملف المحدد: ${form.cvName}` : 'الحد الأقصى للحجم 5 ميجابايت'}
+                    {form.cvName ? `Attached File: ${form.cvName}` : 'Maximum file size: 5MB'}
                   </span>
                 </div>
               </div>
@@ -357,15 +357,15 @@ export default function EngineerRegister() {
               <div>
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800 mb-4">
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                    3. نماذج من أعمالك ومشاريعك السابقة
+                    3. Prior Project Deliverables & Showcase
                   </h3>
                   <button
                     type="button"
                     onClick={addProject}
-                    className="text-xs font-bold text-brand-blue dark:text-brand-cyan hover:underline flex items-center gap-1"
+                    className="text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
                   >
                     <PlusCircle className="w-3.5 h-3.5" />
-                    <span>إضافة مشروع آخر</span>
+                    <span>Add Another Project</span>
                   </button>
                 </div>
 
@@ -377,13 +377,13 @@ export default function EngineerRegister() {
                     >
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                          مشروع #{idx + 1}
+                          Project #{idx + 1}
                         </span>
                         {projects.length > 1 && (
                           <button
                             type="button"
                             onClick={() => removeProject(idx)}
-                            className="text-slate-400 hover:text-red-500 p-1"
+                            className="text-slate-400 hover:text-red-500 p-1 transition"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -393,26 +393,26 @@ export default function EngineerRegister() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         <input
                           type="text"
-                          placeholder="عنوان المشروع (مثال: فيلا سكنية، محطة طاقة...)"
+                          placeholder="Project title (e.g. Residential Villa, Highway Overpass...)"
                           value={p.title}
                           onChange={(e) => updateProject(idx, 'title', e.target.value)}
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         <input
                           type="url"
-                          placeholder="رابط المشروع أو الرندر إن وجد"
+                          placeholder="Project URL or Render link if available"
                           value={p.link}
                           onChange={(e) => updateProject(idx, 'link', e.target.value)}
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
 
                       <textarea
                         rows={2}
-                        placeholder="نبذة مختصرة عن دورك في المشروع والمخرجات..."
+                        placeholder="Brief description of your role, calculation tools, and deliverables..."
                         value={p.description}
                         onChange={(e) => updateProject(idx, 'description', e.target.value)}
-                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs text-slate-900 dark:text-white outline-none"
+                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   ))}
@@ -424,9 +424,9 @@ export default function EngineerRegister() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white text-xs sm:text-sm font-bold shadow-md shadow-brand-blue/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
                 >
-                  {loading ? 'جاري إرسال الطلب للاعتماد...' : 'إرسال طلب الانضمام للمراجعة الهندسية'}
+                  {loading ? 'Submitting Application...' : 'Submit Accreditation Application'}
                 </button>
               </div>
             </form>

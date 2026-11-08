@@ -9,12 +9,11 @@ import {
   Bell, 
   User, 
   LogOut, 
-  PlusCircle, 
   Briefcase, 
-  Users, 
   ShieldCheck, 
-  Check, 
-  ChevronDown
+  ChevronDown,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -98,24 +97,24 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 dark:bg-brand-navyDark/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 dark:border-slate-800'
-          : 'bg-white/80 dark:bg-brand-navyDark/80 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800/60'
+          ? 'bg-white/95 dark:bg-slate-950/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 dark:border-slate-800'
+          : 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800/60'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-white shadow-glow group-hover:scale-105 transition-transform duration-200">
+          <Link to="/" className="flex items-center gap-3 group text-left">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/25 group-hover:scale-105 transition-transform duration-200">
               <Building2 className="w-5 h-5" />
             </div>
-            <div className="text-right">
-              <div className="text-xl font-black text-brand-navy dark:text-white tracking-tight flex items-center">
-                <span>مهندس</span>
-                <span className="text-brand-blue dark:text-brand-cyan">Pro</span>
+            <div>
+              <div className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center">
+                <span>Mahandes</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">Pro</span>
               </div>
-              <p className="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase -mt-1">
-                منصة المهندسين المحترفين
+              <p className="text-[10px] font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase -mt-0.5">
+                Engineering Network
               </p>
             </div>
           </Link>
@@ -126,43 +125,43 @@ export default function Navbar() {
               to="/"
               className={`text-sm font-semibold transition-colors duration-200 ${
                 isActive('/')
-                  ? 'text-brand-blue dark:text-brand-cyan'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-brand-cyan'
+                  ? 'text-brand-blue dark:text-cyan-400 font-bold'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-cyan-400'
               }`}
             >
-              الرئيسية
+              Home
             </Link>
             <Link
               to="/engineers"
               className={`text-sm font-semibold transition-colors duration-200 ${
                 isActive('/engineers')
-                  ? 'text-brand-blue dark:text-brand-cyan'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-brand-cyan'
+                  ? 'text-brand-blue dark:text-cyan-400 font-bold'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-cyan-400'
               }`}
             >
-              استكشف المهندسين
+              Explore Engineers
             </Link>
             <Link
               to="/projects"
               className={`text-sm font-semibold transition-colors duration-200 ${
                 isActive('/projects')
-                  ? 'text-brand-blue dark:text-brand-cyan'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-brand-cyan'
+                  ? 'text-brand-blue dark:text-cyan-400 font-bold'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-cyan-400'
               }`}
             >
-              تصفح المشاريع
+              Browse Projects
             </Link>
             <a
               href="#how-it-works"
-              className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-brand-cyan transition-colors duration-200"
+              className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-cyan-400 transition-colors duration-200"
             >
-              كيف تعمل المنصة
+              How It Works
             </a>
             <a
               href="#features"
-              className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-brand-cyan transition-colors duration-200"
+              className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-cyan-400 transition-colors duration-200"
             >
-              المميزات
+              AI Features
             </a>
           </nav>
 
@@ -172,10 +171,10 @@ export default function Navbar() {
             <button
               type="button"
               onClick={toggleTheme}
-              aria-label="تبديل الوضع الليلي والنهاري"
+              aria-label="Toggle dark mode"
               className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
             >
-              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-brand-navy" />}
+              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
             </button>
 
             {/* Notifications Dropdown (Authenticated) */}
@@ -185,11 +184,11 @@ export default function Navbar() {
                   type="button"
                   onClick={() => setNotifDropdownOpen((prev) => !prev)}
                   className="relative p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
-                  aria-label="الإشعارات"
+                  aria-label="Notifications"
                 >
                   <Bell className="w-4 h-4" />
                   {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse">
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse">
                       {unreadCount}
                     </span>
                   )}
@@ -197,24 +196,24 @@ export default function Navbar() {
 
                 {/* Notifications Panel */}
                 {notifDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-4 z-50 text-right animate-in fade-in duration-150">
+                  <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-4 z-50 text-left animate-in fade-in duration-150">
                     <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                       <span className="font-bold text-sm text-slate-900 dark:text-white">
-                        الإشعارات والتنبيهات
+                        Notifications & Alerts
                       </span>
                       {unreadCount > 0 && (
                         <button
                           onClick={handleMarkAllRead}
-                          className="text-xs text-brand-blue dark:text-brand-cyan hover:underline font-medium"
+                          className="text-xs text-brand-blue dark:text-cyan-400 hover:underline font-semibold"
                         >
-                          تحديد الكل كمقروء
+                          Mark all as read
                         </button>
                       )}
                     </div>
 
                     <div className="divide-y divide-slate-100 dark:divide-slate-800/60 max-h-80 overflow-y-auto mt-2">
                       {notifications.length === 0 ? (
-                        <p className="py-6 text-center text-xs text-slate-400">لا توجد إشعارات حالياً</p>
+                        <p className="py-6 text-center text-xs text-slate-400">No new notifications</p>
                       ) : (
                         notifications.slice(0, 6).map((notif) => (
                           <div
@@ -223,12 +222,12 @@ export default function Navbar() {
                             className={`py-3 px-2 rounded-xl transition-colors cursor-pointer ${
                               notif.read
                                 ? 'opacity-70 hover:bg-slate-50 dark:hover:bg-slate-800/40'
-                                : 'bg-blue-50/60 dark:bg-blue-950/30 hover:bg-blue-50 dark:hover:bg-blue-950/50'
+                                : 'bg-cyan-50/50 dark:bg-cyan-950/30 hover:bg-cyan-50 dark:hover:bg-cyan-950/50'
                             }`}
                           >
                             <div className="flex items-start gap-2">
                               {!notif.read && (
-                                <span className="w-2 h-2 rounded-full bg-brand-blue mt-1.5 shrink-0" />
+                                <span className="w-2 h-2 rounded-full bg-cyan-500 mt-1.5 shrink-0" />
                               )}
                               <div className="flex-1">
                                 <p className="text-xs font-bold text-slate-900 dark:text-white">
@@ -238,7 +237,7 @@ export default function Navbar() {
                                   {notif.message}
                                 </p>
                                 <span className="text-[10px] text-slate-400 mt-1 block">
-                                  {new Date(notif.createdAt).toLocaleDateString('ar-EG', {
+                                  {new Date(notif.createdAt).toLocaleDateString('en-US', {
                                     month: 'short',
                                     day: 'numeric',
                                     hour: '2-digit',
@@ -261,15 +260,15 @@ export default function Navbar() {
               <div className="hidden sm:flex items-center gap-3">
                 <Link
                   to="/login"
-                  className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-brand-blue dark:hover:text-brand-cyan px-3 py-2 transition-colors"
+                  className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-brand-blue dark:hover:text-cyan-400 px-3 py-2 transition-colors"
                 >
-                  تسجيل الدخول
+                  Sign In
                 </Link>
                 <Link
                   to="/register"
-                  className="inline-flex items-center justify-center text-sm font-semibold text-white bg-brand-blue hover:bg-brand-blueHover px-4.5 py-2.5 rounded-xl shadow-sm shadow-brand-blue/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="inline-flex items-center justify-center text-sm font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-700 px-5 py-2.5 rounded-xl shadow-sm shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  انضم إلينا الآن
+                  Get Started
                 </Link>
               </div>
             )}
@@ -280,28 +279,28 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setUserDropdownOpen((prev) => !prev)}
-                  className="flex items-center gap-2 p-1.5 pr-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                  className="flex items-center gap-2 p-1.5 pl-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
                 >
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 text-white text-xs font-bold flex items-center justify-center shadow-sm">
+                    {(user?.fullName || user?.name || user?.username || 'U').charAt(0)}
+                  </div>
                   <span className="text-xs font-bold text-slate-800 dark:text-slate-200 hidden sm:inline">
                     {user?.fullName || user?.name || user?.username}
                   </span>
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-blue to-brand-navy text-white text-xs font-bold flex items-center justify-center">
-                    {(user?.fullName || user?.name || user?.username || 'U').charAt(0)}
-                  </div>
+                  <ChevronDown className="w-4 h-4 text-slate-400" />
                 </button>
 
                 {/* Dropdown Menu */}
                 {userDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-2 z-50 text-right animate-in fade-in duration-150">
+                  <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-2 z-50 text-left animate-in fade-in duration-150">
                     <div className="p-3 border-b border-slate-100 dark:border-slate-800">
                       <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
                         {user?.fullName || user?.name || user?.username}
                       </p>
-                      <p className="text-[11px] text-slate-400 truncate mt-0.5">
-                        {role === 'client' && 'حساب عميل'}
-                        {role === 'engineer' && 'حساب مهندس'}
-                        {role === 'admin' && 'لوحة الإدارة'}
+                      <p className="text-[11px] text-cyan-600 dark:text-cyan-400 capitalize mt-0.5 font-medium">
+                        {role === 'client' && 'Client Account'}
+                        {role === 'engineer' && 'Engineer Profile'}
+                        {role === 'admin' && 'Administrator'}
                       </p>
                     </div>
 
@@ -312,7 +311,7 @@ export default function Navbar() {
                           className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
                         >
                           <Briefcase className="w-4 h-4 text-brand-blue" />
-                          <span>لوحة تحكم العميل</span>
+                          <span>Client Dashboard</span>
                         </Link>
                       )}
                       {role === 'engineer' && (
@@ -321,15 +320,15 @@ export default function Navbar() {
                             to={`/engineer/${user.id}`}
                             className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
                           >
-                            <User className="w-4 h-4 text-brand-blue" />
-                            <span>ملفي الشخصي</span>
+                            <User className="w-4 h-4 text-cyan-500" />
+                            <span>My Profile</span>
                           </Link>
                           <Link
                             to="/projects"
                             className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
                           >
-                            <Briefcase className="w-4 h-4 text-emerald-500" />
-                            <span>المشاريع المتاحة</span>
+                            <Briefcase className="w-4 h-4 text-brand-blue" />
+                            <span>Browse Projects</span>
                           </Link>
                         </>
                       )}
@@ -339,7 +338,7 @@ export default function Navbar() {
                           className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
                         >
                           <ShieldCheck className="w-4 h-4 text-brand-blue" />
-                          <span>لوحة الإدارة</span>
+                          <span>Admin Portal</span>
                         </Link>
                       )}
                     </div>
@@ -351,7 +350,7 @@ export default function Navbar() {
                         className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition"
                       >
                         <LogOut className="w-4 h-4" />
-                        <span>تسجيل الخروج</span>
+                        <span>Sign Out</span>
                       </button>
                     </div>
                   </div>
@@ -364,7 +363,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-              aria-label="القائمة الرئيسية"
+              aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -374,30 +373,30 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-3 text-right">
+        <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-3 text-left">
           <Link
             to="/"
             className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            الرئيسية
+            Home
           </Link>
           <Link
             to="/engineers"
             className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            استكشف المهندسين
+            Explore Engineers
           </Link>
           <Link
             to="/projects"
             className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            تصفح المشاريع
+            Browse Projects
           </Link>
           <a
             href="#how-it-works"
             className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            كيف تعمل المنصة
+            How It Works
           </a>
 
           {!isAuthenticated ? (
@@ -406,13 +405,13 @@ export default function Navbar() {
                 to="/login"
                 className="w-full text-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-800 dark:text-white"
               >
-                تسجيل الدخول
+                Sign In
               </Link>
               <Link
                 to="/register"
-                className="w-full text-center py-2.5 rounded-xl bg-brand-blue text-white text-sm font-bold shadow-sm"
+                className="w-full text-center py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold shadow-sm"
               >
-                إنشاء حساب جديد
+                Create Account
               </Link>
             </div>
           ) : (
@@ -421,7 +420,7 @@ export default function Navbar() {
                 onClick={handleLogout}
                 className="w-full text-center py-2.5 rounded-xl bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400 text-sm font-bold"
               >
-                تسجيل الخروج
+                Sign Out
               </button>
             </div>
           )}

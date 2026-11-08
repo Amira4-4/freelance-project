@@ -21,7 +21,8 @@ import {
   Lock,
   Unlock,
   Building2,
-  Calendar
+  Calendar,
+  Sparkles
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -49,7 +50,7 @@ import {
   SPECIALTY_LABELS 
 } from '../services/storage';
 
-const COLORS = ['#2563EB', '#06B6D4', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899'];
+const COLORS = ['#2563EB', '#06B6D4', '#3B82F6', '#10B981', '#6366F1', '#0EA5E9'];
 
 export default function AdminDashboard() {
   const { user, role } = useAuth();
@@ -86,7 +87,7 @@ export default function AdminDashboard() {
 
   const handleApprove = (id) => {
     updateEngineerStatus(id, 'approved');
-    setMessage('تم اعتماد وتفعيل حساب المهندس بنجاح! تم إرسال إشعار للمهندس.');
+    setMessage('Engineer verified and activated successfully! Notification sent.');
     setSelectedEngineer(null);
     loadEngineers();
     setTimeout(() => setMessage(''), 4000);
@@ -95,7 +96,7 @@ export default function AdminDashboard() {
   const handleRejectConfirm = () => {
     if (!selectedEngineer) return;
     updateEngineerStatus(selectedEngineer.id, 'rejected', rejectReason);
-    setMessage('تم رفض الطلب وتدوين الأسباب للمهندس.');
+    setMessage('Application rejected with feedback sent to the engineer.');
     setRejectModalOpen(false);
     setRejectReason('');
     setSelectedEngineer(null);
@@ -111,26 +112,27 @@ export default function AdminDashboard() {
 
   return (
     <Layout>
-      <div className="py-8 sm:py-12 text-right">
+      <div className="py-8 sm:py-12 text-left bg-slate-50/60 dark:bg-slate-950/40 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Banner */}
-          <div className="bg-gradient-to-r from-brand-navy to-slate-900 rounded-3xl p-6 sm:p-8 text-white mb-8 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white mb-8 shadow-xl border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-brand-cyan text-xs font-bold mb-3">
-                <ShieldCheck className="w-4 h-4" />
-                <span>لوحة القيادة الإدارية والتحكم SaaS</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold mb-3 border border-cyan-500/30">
+                <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                <span>Executive SaaS Management Console</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black">
-                مركز إدارة منصة مهندسPro
+                MahandesPro Platform Command Center
               </h1>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
-                مراجعة واعتماد طلبات المهندسين الجدد، فحص السير الذاتية والشهادات النقابية، ومراقبة نمو المشاريع والإحصائيات.
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl leading-relaxed">
+                Review and approve new engineering credentials, verify licenses and resumes, and monitor marketplace growth metrics.
               </p>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
-                النظام متصل وآمن
+              <span className="text-xs px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Core Services Operational</span>
               </span>
             </div>
           </div>
@@ -145,69 +147,69 @@ export default function AdminDashboard() {
           {/* KPI Statistics Overview */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800 shadow-card">
-              <span className="text-xs text-slate-400 block mb-1">طلبات الاعتماد المعلقة</span>
+              <span className="text-xs text-slate-400 block mb-1 font-medium">Pending Verifications</span>
               <p className="text-2xl font-black text-amber-500">{stats.pendingApprovals}</p>
-              <span className="text-[11px] text-slate-400 mt-1 block">تتطلب تدقيق الشهادات</span>
+              <span className="text-[11px] text-slate-400 mt-1 block">Requires accreditation check</span>
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800 shadow-card">
-              <span className="text-xs text-slate-400 block mb-1">إجمالي المهندسين المعتمدين</span>
-              <p className="text-2xl font-black text-brand-blue dark:text-brand-cyan">{stats.activeEngineers}</p>
-              <span className="text-[11px] text-emerald-600 font-semibold mt-1 block">نشطون وجاهزون للعمل</span>
+              <span className="text-xs text-slate-400 block mb-1 font-medium">Verified Engineers</span>
+              <p className="text-2xl font-black text-blue-600 dark:text-cyan-400">{stats.activeEngineers}</p>
+              <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold mt-1 block">Active & bidding</span>
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800 shadow-card">
-              <span className="text-xs text-slate-400 block mb-1">المشاريع المطروحة</span>
+              <span className="text-xs text-slate-400 block mb-1 font-medium">Platform Projects</span>
               <p className="text-2xl font-black text-slate-900 dark:text-white">{stats.totalProjects}</p>
-              <span className="text-[11px] text-slate-400 mt-1 block">{stats.openProjects} مشروع مفتوح حالياً</span>
+              <span className="text-[11px] text-slate-400 mt-1 block">{stats.openProjects} open for tenders</span>
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800 shadow-card">
-              <span className="text-xs text-slate-400 block mb-1">العملاء المسجلون</span>
+              <span className="text-xs text-slate-400 block mb-1 font-medium">Enterprise Clients</span>
               <p className="text-2xl font-black text-slate-900 dark:text-white">{stats.totalClients}</p>
-              <span className="text-[11px] text-slate-400 mt-1 block">شركات ومطورون أفراد</span>
+              <span className="text-[11px] text-slate-400 mt-1 block">Developers & owners</span>
             </div>
           </div>
 
           {/* Section Navigation Tabs */}
-          <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 mb-8 pb-1">
+          <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 mb-8 pb-1 overflow-x-auto">
             <button
               type="button"
               onClick={() => setActiveTab('verification')}
-              className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 ${
+              className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 shrink-0 ${
                 activeTab === 'verification'
-                  ? 'bg-brand-blue text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
               <Users className="w-4 h-4" />
-              <span>مراجعة طلبات المهندسين ({stats.pendingApprovals} معلق)</span>
+              <span>Engineer Review Queue ({stats.pendingApprovals} pending)</span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('analytics')}
-              className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 ${
+              className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 shrink-0 ${
                 activeTab === 'analytics'
-                  ? 'bg-brand-blue text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
               <BarChart3 className="w-4 h-4" />
-              <span>الرسوم البيانية والتحليلات</span>
+              <span>Analytics & Growth</span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('projects')}
-              className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 ${
+              className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 shrink-0 ${
                 activeTab === 'projects'
-                  ? 'bg-brand-blue text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
               <Briefcase className="w-4 h-4" />
-              <span>مراقبة المشاريع ({allProjects.length})</span>
+              <span>Project Audit ({allProjects.length})</span>
             </button>
           </div>
 
@@ -218,18 +220,18 @@ export default function AdminDashboard() {
               <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/90 dark:border-slate-800 shadow-sm mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
                   {[
-                    { key: 'pending', label: 'قيد المراجعة', count: stats.pendingApprovals },
-                    { key: 'approved', label: 'المقبولون', count: stats.activeEngineers },
-                    { key: 'rejected', label: 'المرفوضون', count: engineers.filter((e) => e.status === 'rejected').length },
-                    { key: 'all', label: 'الكل', count: stats.totalEngineers },
+                    { key: 'pending', label: 'Pending Review', count: stats.pendingApprovals },
+                    { key: 'approved', label: 'Approved', count: stats.activeEngineers },
+                    { key: 'rejected', label: 'Declined', count: engineers.filter((e) => e.status === 'rejected').length },
+                    { key: 'all', label: 'All Engineers', count: stats.totalEngineers },
                   ].map((f) => (
                     <button
                       key={f.key}
                       onClick={() => setFilter(f.key)}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition shrink-0 ${
                         filter === f.key
-                          ? 'bg-brand-blue text-white shadow-sm'
-                          : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                          ? 'bg-blue-600 text-white shadow-sm'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                       }`}
                     >
                       {f.label} ({f.count})
@@ -238,13 +240,13 @@ export default function AdminDashboard() {
                 </div>
 
                 <div className="relative w-full sm:w-72">
-                  <Search className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2" />
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    placeholder="ابحث بالاسم أو البريد..."
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pr-9 pl-3 py-2 text-xs text-slate-900 dark:text-white outline-none"
+                    placeholder="Search by name, email, or specialty..."
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
@@ -255,7 +257,7 @@ export default function AdminDashboard() {
                 <div className="lg:col-span-5 space-y-3">
                   {filteredEngineers.length === 0 ? (
                     <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-400 text-xs">
-                      لا توجد طلبات مطابقة لهذا الفلتر.
+                      No applications match this filter criteria.
                     </div>
                   ) : (
                     filteredEngineers.map((eng) => {
@@ -266,20 +268,20 @@ export default function AdminDashboard() {
                           onClick={() => setSelectedEngineer(eng)}
                           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                             isSelected
-                              ? 'bg-blue-50/70 border-brand-blue dark:bg-blue-950/50 dark:border-brand-blue shadow-md'
-                              : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 hover:border-slate-300'
+                              ? 'bg-blue-50/70 border-blue-500 dark:bg-blue-950/50 dark:border-cyan-400 shadow-md'
+                              : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                           }`}
                         >
                           <div className="flex items-start justify-between gap-3">
                             <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-navy text-white font-bold flex items-center justify-center shrink-0">
+                              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-bold flex items-center justify-center shrink-0">
                                 {eng.fullName.charAt(0)}
                               </div>
                               <div>
                                 <h4 className="text-sm font-bold text-slate-900 dark:text-white">
                                   {eng.fullName}
                                 </h4>
-                                <p className="text-xs text-brand-blue dark:text-brand-cyan mt-0.5">
+                                <p className="text-xs text-blue-600 dark:text-cyan-400 mt-0.5">
                                   {SPECIALTY_LABELS[eng.specialty] || eng.specialty}
                                 </p>
                               </div>
@@ -288,22 +290,22 @@ export default function AdminDashboard() {
                             <span
                               className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                                 eng.status === 'pending'
-                                  ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                                  ? 'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300'
                                   : eng.status === 'approved'
-                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                  : 'bg-red-50 text-red-700 border border-red-200'
+                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300'
+                                  : 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/40 dark:text-red-300'
                               }`}
                             >
-                              {eng.status === 'pending' && 'قيد المراجعة'}
-                              {eng.status === 'approved' && 'مقبول'}
-                              {eng.status === 'rejected' && 'مرفوض'}
+                              {eng.status === 'pending' && 'Under Review'}
+                              {eng.status === 'approved' && 'Verified'}
+                              {eng.status === 'rejected' && 'Rejected'}
                             </span>
                           </div>
 
                           <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
-                            <span>خبرة: {eng.experience} سنوات</span>
-                            <span>السعر: {eng.hourlyRate} ج.م/س</span>
-                            <span>{new Date(eng.createdAt).toLocaleDateString('ar-EG')}</span>
+                            <span>Experience: {eng.experience} yrs</span>
+                            <span>Rate: ${eng.hourlyRate}/hr</span>
+                            <span>{new Date(eng.createdAt).toLocaleDateString('en-US')}</span>
                           </div>
                         </div>
                       );
@@ -331,12 +333,12 @@ export default function AdminDashboard() {
                                   : 'bg-red-100 text-red-800'
                               }`}
                             >
-                              {selectedEngineer.status === 'pending' && 'طلب جديد'}
-                              {selectedEngineer.status === 'approved' && 'معتمد'}
-                              {selectedEngineer.status === 'rejected' && 'مرفوض'}
+                              {selectedEngineer.status === 'pending' && 'New Application'}
+                              {selectedEngineer.status === 'approved' && 'Verified Consultant'}
+                              {selectedEngineer.status === 'rejected' && 'Rejected'}
                             </span>
                           </div>
-                          <p className="text-xs font-semibold text-brand-blue dark:text-brand-cyan mt-1">
+                          <p className="text-xs font-semibold text-blue-600 dark:text-cyan-400 mt-1">
                             {SPECIALTY_LABELS[selectedEngineer.specialty] || selectedEngineer.specialty}
                           </p>
                         </div>
@@ -346,18 +348,18 @@ export default function AdminDashboard() {
                             <button
                               type="button"
                               onClick={() => handleApprove(selectedEngineer.id)}
-                              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm"
+                              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm transition"
                             >
                               <Check className="w-4 h-4" />
-                              <span>قبول المهندس</span>
+                              <span>Approve</span>
                             </button>
                             <button
                               type="button"
                               onClick={() => setRejectModalOpen(true)}
-                              className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm"
+                              className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm transition"
                             >
                               <X className="w-4 h-4" />
-                              <span>رفض الطلب</span>
+                              <span>Reject</span>
                             </button>
                           </div>
                         )}
@@ -365,40 +367,40 @@ export default function AdminDashboard() {
 
                       {/* Info Grid */}
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                          <span className="text-slate-400 block mb-0.5">الهاتف</span>
-                          <span className="font-bold text-slate-800 dark:text-slate-200" dir="ltr">
+                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                          <span className="text-slate-400 block mb-0.5 font-medium">Phone</span>
+                          <span className="font-bold text-slate-800 dark:text-slate-200">
                             {selectedEngineer.phone}
                           </span>
                         </div>
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                          <span className="text-slate-400 block mb-0.5">البريد الإلكتروني</span>
+                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                          <span className="text-slate-400 block mb-0.5 font-medium">Email</span>
                           <span className="font-bold text-slate-800 dark:text-slate-200 truncate block">
                             {selectedEngineer.email}
                           </span>
                         </div>
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                          <span className="text-slate-400 block mb-0.5">سعر الساعة</span>
+                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                          <span className="text-slate-400 block mb-0.5 font-medium">Hourly Rate</span>
                           <span className="font-bold text-slate-800 dark:text-slate-200">
-                            {selectedEngineer.hourlyRate} ج.م/ساعة
+                            ${selectedEngineer.hourlyRate}/hr
                           </span>
                         </div>
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                          <span className="text-slate-400 block mb-0.5">الخبرة</span>
+                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                          <span className="text-slate-400 block mb-0.5 font-medium">Experience</span>
                           <span className="font-bold text-slate-800 dark:text-slate-200">
-                            {selectedEngineer.experience} سنوات
+                            {selectedEngineer.experience} Years
                           </span>
                         </div>
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                          <span className="text-slate-400 block mb-0.5">المدينة</span>
+                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                          <span className="text-slate-400 block mb-0.5 font-medium">Location</span>
                           <span className="font-bold text-slate-800 dark:text-slate-200">
-                            {selectedEngineer.location || 'مصر'}
+                            {selectedEngineer.location || 'United States'}
                           </span>
                         </div>
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                          <span className="text-slate-400 block mb-0.5">حالة التفرغ</span>
+                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+                          <span className="text-slate-400 block mb-0.5 font-medium">Availability</span>
                           <span className="font-bold text-slate-800 dark:text-slate-200">
-                            {selectedEngineer.availability === 'available' ? 'متاح للعمل' : 'مشغول'}
+                            {selectedEngineer.availability === 'available' ? 'Available' : 'Busy'}
                           </span>
                         </div>
                       </div>
@@ -406,7 +408,7 @@ export default function AdminDashboard() {
                       {/* Bio */}
                       <div>
                         <h4 className="text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                          النبذة وخبرات المتقدم:
+                          Professional Bio & Statement:
                         </h4>
                         <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
                           {selectedEngineer.bio}
@@ -416,13 +418,13 @@ export default function AdminDashboard() {
                       {/* Skills */}
                       <div>
                         <h4 className="text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                          المهارات والبرامج:
+                          Engineering Skills & Software:
                         </h4>
                         <div className="flex flex-wrap gap-1.5">
                           {(selectedEngineer.skills || []).map((s, idx) => (
                             <span
                               key={idx}
-                              className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200"
+                              className="px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-slate-800 text-xs font-semibold text-blue-900 dark:text-blue-200 border border-blue-100 dark:border-slate-700"
                             >
                               {s}
                             </span>
@@ -433,22 +435,26 @@ export default function AdminDashboard() {
                       {/* Certifications and CV */}
                       <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
-                          <a
-                            href={selectedEngineer.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-bold text-blue-600 hover:underline"
-                          >
-                            LinkedIn
-                          </a>
-                          <a
-                            href={selectedEngineer.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-bold text-slate-800 dark:text-slate-200 hover:underline"
-                          >
-                            GitHub
-                          </a>
+                          {selectedEngineer.linkedin && (
+                            <a
+                              href={selectedEngineer.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs font-bold text-blue-600 hover:underline"
+                            >
+                              LinkedIn Profile
+                            </a>
+                          )}
+                          {selectedEngineer.github && (
+                            <a
+                              href={selectedEngineer.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs font-bold text-slate-800 dark:text-slate-200 hover:underline"
+                            >
+                              GitHub Repository
+                            </a>
+                          )}
                         </div>
 
                         <button
@@ -460,19 +466,19 @@ export default function AdminDashboard() {
                               link.download = selectedEngineer.cvName || 'Engineer_CV.pdf';
                               link.click();
                             } else {
-                              alert('السيرة الذاتية غير مرفوعة بصيغة ملف مباشر.');
+                              alert('No uploaded CV file attached.');
                             }
                           }}
-                          className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-200 flex items-center gap-1.5"
+                          className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1.5 transition"
                         >
-                          <Download className="w-3.5 h-3.5 text-brand-blue" />
-                          <span>تحميل السيرة الذاتية ({selectedEngineer.cvName || 'CV.pdf'})</span>
+                          <Download className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400" />
+                          <span>Download CV ({selectedEngineer.cvName || 'CV.pdf'})</span>
                         </button>
                       </div>
                     </div>
                   ) : (
                     <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 text-slate-400 text-xs">
-                      اختر طلباً من القائمة لعرض كامل تفاصيل المتقدم ومراجعة السيرة الذاتية.
+                      Select an engineer application from the left to inspect complete qualifications and CV credentials.
                     </div>
                   )}
                 </div>
@@ -488,16 +494,16 @@ export default function AdminDashboard() {
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                      معدل نمو المنصة والمشاريع الهندسية
+                      Platform Growth & Project Volume
                     </h3>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      تزايد تسجيل المهندسين والعملاء شهرياً
+                      Monthly registration of verified engineers vs active client projects
                     </p>
                   </div>
                   <TrendingUp className="w-5 h-5 text-emerald-500" />
                 </div>
 
-                <div className="h-72 w-full dir-ltr">
+                <div className="h-72 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={analytics.growthData}>
                       <defs>
@@ -518,7 +524,7 @@ export default function AdminDashboard() {
                       <Area
                         type="monotone"
                         dataKey="engineers"
-                        name="المهندسون"
+                        name="Engineers"
                         stroke="#2563EB"
                         fillOpacity={1}
                         fill="url(#colorEng)"
@@ -526,7 +532,7 @@ export default function AdminDashboard() {
                       <Area
                         type="monotone"
                         dataKey="clients"
-                        name="العملاء"
+                        name="Clients"
                         stroke="#06B6D4"
                         fillOpacity={1}
                         fill="url(#colorClient)"
@@ -541,9 +547,9 @@ export default function AdminDashboard() {
                 {/* Specialization Distribution */}
                 <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
                   <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
-                    توزيع المشاريع حسب التخصص الهندسي
+                    Project Distribution by Engineering Discipline
                   </h3>
-                  <div className="h-64 w-full dir-ltr">
+                  <div className="h-64 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
                         <Pie
@@ -569,16 +575,16 @@ export default function AdminDashboard() {
                 {/* Monthly Activity Bar Chart */}
                 <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
                   <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
-                    المشاريع المنفذة شهرياً
+                    Delivered Projects Per Month
                   </h3>
-                  <div className="h-64 w-full dir-ltr">
+                  <div className="h-64 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={analytics.growthData}>
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
                         <XAxis dataKey="month" stroke="#94A3B8" fontSize={11} />
                         <YAxis stroke="#94A3B8" fontSize={11} />
                         <Tooltip />
-                        <Bar dataKey="projects" name="المشاريع المنفذة" fill="#2563EB" radius={[6, 6, 0, 0]} />
+                        <Bar dataKey="projects" name="Completed Projects" fill="#2563EB" radius={[6, 6, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -591,24 +597,24 @@ export default function AdminDashboard() {
           {activeTab === 'projects' && (
             <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-card">
               <h3 className="text-base font-bold text-slate-900 dark:text-white mb-6">
-                مراقبة المشاريع المطروحة على المنصة ({allProjects.length})
+                Active Projects Audit Directory ({allProjects.length})
               </h3>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-xs text-right">
+                <table className="w-full text-xs text-left">
                   <thead>
                     <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-400">
-                      <th className="pb-3 font-semibold">عنوان المشروع</th>
-                      <th className="pb-3 font-semibold">التخصص</th>
-                      <th className="pb-3 font-semibold">صاحب المشروع</th>
-                      <th className="pb-3 font-semibold">الميزانية</th>
-                      <th className="pb-3 font-semibold">العروض</th>
-                      <th className="pb-3 font-semibold">الحالة</th>
+                      <th className="pb-3 font-semibold">Project Title</th>
+                      <th className="pb-3 font-semibold">Discipline</th>
+                      <th className="pb-3 font-semibold">Client Name</th>
+                      <th className="pb-3 font-semibold">Budget</th>
+                      <th className="pb-3 font-semibold">Bids</th>
+                      <th className="pb-3 font-semibold">Status</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {allProjects.map((p) => (
-                      <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                      <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                         <td className="py-3.5 font-bold text-slate-900 dark:text-white">
                           {p.title}
                         </td>
@@ -619,20 +625,20 @@ export default function AdminDashboard() {
                           {p.clientName}
                         </td>
                         <td className="py-3.5 font-extrabold text-slate-900 dark:text-white">
-                          {p.budget.toLocaleString()} ج.م
+                          ${p.budget.toLocaleString()} USD
                         </td>
-                        <td className="py-3.5 font-bold text-brand-blue">
+                        <td className="py-3.5 font-bold text-blue-600 dark:text-cyan-400">
                           {p.proposalsCount || 0}
                         </td>
                         <td className="py-3.5">
                           <span
                             className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                               p.status === 'open'
-                                ? 'bg-emerald-50 text-emerald-700'
-                                : 'bg-amber-50 text-amber-700'
+                                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300'
+                                : 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300'
                             }`}
                           >
-                            {p.status === 'open' ? 'مفتوح' : 'قيد التنفيذ'}
+                            {p.status === 'open' ? 'Open' : 'In Progress'}
                           </span>
                         </td>
                       </tr>
@@ -649,19 +655,19 @@ export default function AdminDashboard() {
       {rejectModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setRejectModalOpen(false)} />
-          <div className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl z-10 text-right animate-in fade-in duration-150">
+          <div className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl z-10 text-left animate-in fade-in duration-150 border border-slate-200 dark:border-slate-800">
             <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
-              توضيح سبب رفض طلب التسجيل
+              Decline Application Reason
             </h3>
             <p className="text-xs text-slate-400 mb-4">
-              سيتم إرسال هذا السبب إلى المهندس لتصحيح بياناته وإعادة التقديم.
+              This feedback will be communicated to the engineer so they can update their credentials and re-apply.
             </p>
 
             <textarea
               rows={4}
               value={rejectReason}
               onChange={(e) => setRejectReason(e.target.value)}
-              placeholder="مثال: يرجى إرفاق كارنيه نقابة المهندسين الساري أو استكمال بيانات المشاريع السابقة..."
+              placeholder="e.g. Please provide a verified government engineering syndicate ID or detailed calculation sheet sample..."
               className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-red-500 mb-4"
             />
 
@@ -669,16 +675,16 @@ export default function AdminDashboard() {
               <button
                 type="button"
                 onClick={handleRejectConfirm}
-                className="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold"
+                className="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition shadow-sm"
               >
-                تأكيد الرفض
+                Confirm Decline
               </button>
               <button
                 type="button"
                 onClick={() => setRejectModalOpen(false)}
-                className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600"
+                className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               >
-                إلغاء
+                Cancel
               </button>
             </div>
           </div>
